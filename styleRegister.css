@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body{
+    margin: 0;
+    font-family: Poppins;
+}
+
+#mainLogin{
+    width: 100vw;
+    height: 100vh;
+    background-color: #2f2841;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerLogin{
+    margin: 0px auto;
+    min-width: 23vw;
+    min-height: 40vh;
+    padding: 17px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: aliceblue;
+    box-shadow: 0px 10px 40px #00000056;
+}
+
+.centerLogin > h1{
+    color: rgb(7, 7, 29);
+    font: 800px;
+    margin: 0px;
+}
+
+.text-field{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.text-field > input{
+    min-width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background: #514869;
+    color: #f0ffffde;
+    font-size: 12pt;
+    box-shadow: 0px 10px 40px #00000056;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.text-field > label{
+    color:#000000da;
+    margin-bottom: 10px;
+}
+
+.text-field > input::placeholder{
+    color: #f0ffffde;
+}
+
+.btnLogin{
+    width: 80%;
+    padding: 16px 0px;
+    margin: 25px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 800px;
+    letter-spacing: 3px;
+    color: #2b134b;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0px 10px 40px -12px #2b134b;
+}
+
+.btnLogin:hover{
+    background-color: #faf5ff;
+
+}
+.message{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.message>p{
+    margin: 0px;
+}
