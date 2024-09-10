@@ -1,3 +1,14 @@
+<?php 
+  ob_start();
+  session_start();
+  if(!isset($_SESSION['emailUser']) && (!isset($_SESSION['senhaLogin']))){
+    header("Location: ../index.php");
+    exit;
+  }
+  
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt_br">
 <head>
