@@ -5,10 +5,12 @@
     header("Location: ../index.php");
     exit;
   }
-  
+  if(isset($_REQUEST['sair'])){
+    session_destroy();
+    header("Location: ../index.php");
+  }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="pt_br">
 <head>
@@ -53,6 +55,9 @@
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="../paginas/calendar.html" class="nav-link">Calendário</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="?sair" style="background-color: red; color: black" class="nav-link">Sair</a>
       </li>
     </ul>
 
