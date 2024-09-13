@@ -13,8 +13,11 @@
     elseif($_GET['section' == 'update_projeto']){
       include_once('../paginas/conteudo/update_projeto.php');
     }
+    else{
+      include_once('conteudo/cadastroProjetos.php');
+    }
 
   }
-  include_once('conteudo/cadastroProjetos.php');
+
   include_once('../includes/footer.php');
 

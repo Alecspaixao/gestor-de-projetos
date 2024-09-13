@@ -12,7 +12,7 @@
             <h1>Faça login para continuar</h1>
         <form method="post">
             <div class="text-field">
-                <label for="usuario">Usuário ou E-mail</label>
+                <label for="email">Usuário ou E-mail</label>
                 <input type="text" name="email" placeholder="Insira o usuário ou e-mail">
             </div>
 
