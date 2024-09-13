@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `tb_user`
+--
+
+DROP TABLE IF EXISTS `tb_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_user` (
+  `id_user` int NOT NULL AUTO_INCREMENT,
+  `nome_user` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_user` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `senha_user` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto_user` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_user`
+--
+
+LOCK TABLES `tb_user` WRITE;
+/*!40000 ALTER TABLE `tb_user` DISABLE KEYS */;
+INSERT INTO `tb_user` VALUES (1,'Thiago','thiago@gmail.com','1234',NULL);
+/*!40000 ALTER TABLE `tb_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_project`
 --
 
@@ -34,15 +61,6 @@ CREATE TABLE `tb_project` (
   CONSTRAINT `fk_id_user` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tb_project`
---
-
-LOCK TABLES `tb_project` WRITE;
-/*!40000 ALTER TABLE `tb_project` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tb_project` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `tb_todo`
@@ -71,32 +89,6 @@ LOCK TABLES `tb_todo` WRITE;
 /*!40000 ALTER TABLE `tb_todo` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `tb_user`
---
-
-DROP TABLE IF EXISTS `tb_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tb_user` (
-  `id_user` int NOT NULL AUTO_INCREMENT,
-  `nome_user` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_user` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `senha_user` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto_user` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tb_user`
---
-
-LOCK TABLES `tb_user` WRITE;
-/*!40000 ALTER TABLE `tb_user` DISABLE KEYS */;
-INSERT INTO `tb_user` VALUES (1,'Thiago','thiago@gmail.com','1234',NULL);
-/*!40000 ALTER TABLE `tb_user` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
