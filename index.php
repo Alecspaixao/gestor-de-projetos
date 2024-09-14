@@ -47,7 +47,7 @@
             if($resultado->rowCount() > 0){
                 $user = $resultado->fetch(PDO::FETCH_ASSOC);
                 if (password_verify($senhaLogin, $user['senha_user'])){
-                    $_SESSION['emailUser'] = $optionLogin;
+                    $_SESSION['LoginUser'] = $optionLogin;
                     $_SESSION['senhaLogin'] = $user['id_user'];
                     echo "<div>Logado com sucesso!</div>";
                     header("Refresh: 1, paginas/home.php");

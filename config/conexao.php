@@ -1,9 +1,9 @@
 <?php
     try{
     define('HOST', 'localhost');
-    define('BD', 'ProjectShelf');
+    define('BD', 'gestor-de-projetos');
     define('USER', 'root');
-    define('PASS', 'bdjmf');
+    define('PASS', '7402285476bd');
 
     $conexao = new PDO('mysql:host='.HOST.';dbname='.BD,USER,PASS);
     $conexao -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

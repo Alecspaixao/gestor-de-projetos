@@ -1,36 +1,43 @@
-<form method="post">
-    <label for="nomeProjeto">Nome do projeto:</label><br>
-    <input type="text" name="nomeProjeto"><br>
+
+<?php
+    include_once('../config/conexao.php');
+    $timezone = new DateTime('now', new DateTimeZone('America/Fortaleza'));
+    echo $timezone->format('Y-m-d H:i:s');
+?>
+    <div style="display: flex; margin-left: auto;">
+<form method="post" style="margin-left: auto;" enctype="multipart/form-data">
+    <label for=":projectName">Nome do projeto:</label><br>
+    <input type="text" name=":projectName"><br>
 
     <label for="desc">Descrição do projeto:</label><br>
     <input type="text" name="desc"><br>
 
     <label for="banner">Banner do projeto:</label><br>
-    <input type="file" name="banner"><br>
+    <input type="file" name="banner">
+    <input type="text" hidden name="id_user" value=<?php echo "$id_user"?>>
     <button type="submit" name="btnCreate">Criar</button>
 </form>
-
+</div>
 <?php
-    include_once('../../config/conexao.php');
     
-    if(isset($_POST['btnCreate'])){
-        $nomeProjeto = $_POST['nomeProjeto'];
-        $descProjeto= $_POST['desc'];
-        $bannerProjeto = $_FILES['banner'];
+if(isset($_POST['btnCreate'])){
+    $projectName = $_POST[':projectName'];
+    $projectDesc= $_POST['desc'];
+    $id_user = $_POST['id_user'];
 
-        if (!empty($_FILES['foto']['name'])) {
-            $formatosPermitidos = array("png", "jpg", "jpeg", "gif"); // Formatos permitidos
-            $extensao = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION); // Obtém a extensão do arquivo
-    
-            // Verifica se a extensão do arquivo está nos formatos permitidos
-            if (in_array(strtolower($extensao), $formatosPermitidos)) {
-                $pasta = "img/"; // Define o diretório para upload
-                $temporario = $_FILES['foto']['tmp_name']; // Caminho temporário do arquivo
-                $bannerProjeto = uniqid() . ".$extensao"; // Gera um nome único para o arquivo
-    
-                // Move o arquivo para o diretório de imagens
-                if (move_uploaded_file($temporario, "../../dist/img/" . $bannerProjeto)) {
-                    // Sucesso no upload da imagem
+    if(isset($_FILES['banner'])){
+        
+
+        if (!empty($_FILES['banner']['name'])) {
+            $allowedFormats = array("png", "jpg", "jpeg", "gif");
+            $extention = pathinfo($_FILES['banner']['name'], PATHINFO_EXTENSION);
+
+            if (in_array(strtolower($extention),$allowedFormats)) {
+                $destiny = "../dist/img/banner/";
+                $tmpFolder = $_FILES['banner']['tmp_name'];
+                $projectBanner = uniqid() . ".$extention";
+
+                if (move_uploaded_file($tmpFolder, $destiny . $projectBanner)) {
                 } else {
                     echo '<div class="container">
                             <div class="alert alert-danger alert-dismissible">
@@ -39,7 +46,7 @@
                                 Não foi possível fazer o upload do arquivo.
                             </div>
                         </div>';
-                    exit(); // Termina a execução do script após o erro
+                    exit();
                 }
             } else {
                 echo '<div class="container">
@@ -49,21 +56,24 @@
                             Formato de arquivo não permitido.
                         </div>
                     </div>';
-                exit(); // Termina a execução do script após o erro
+                exit();
             }
         } else {
-            // Define um avatar padrão caso não seja enviado nenhum arquivo de foto
-            $bannerProjeto = 'avatar-padrao.png'; // Nome do arquivo de avatar padrão
+            $projectBanner = 'banner-padrao.png';
         }
+    }else{
+        echo "foto nao enviada!!!!!";
+    }
         
 
 
-        $insertProject = "INSERT INTO tb_project (nome_projeto, descricao_projeto, banner_projeto) VALUES (:nomeProjeto, :descProjeto, :bannerProjeto)";
+        $insertProject = "INSERT INTO tb_project (nome_projeto, descricao_projeto, banner_projeto, id_user) VALUES (:projectName, :projectDesc, :projectBanner, :id_user)";
 
         $resultado = $conexao->prepare(($insertProject));
-        $resultado->bindParam(':nomeProjeto', $nomeProjeto, PDO::PARAM_STR);
-        $resultado->bindParam(':descProjeto', $descProjeto, PDO::PARAM_STR);
-        $resultado->bindParam(':bannerProjeto', $bannerProjeto, PDO::PARAM_STR);
+        $resultado->bindParam(':projectName', $projectName, PDO::PARAM_STR);
+        $resultado->bindParam(':projectDesc', $projectDesc, PDO::PARAM_STR);
+        $resultado->bindParam(':projectBanner', $projectBanner, PDO::PARAM_STR);
+        $resultado->bindParam(':id_user', $id_user, PDO::PARAM_INT);
         $resultado->execute();
 
         if($resultado->rowCount() > 0){
@@ -71,8 +81,9 @@
         }else{
             echo "dados nao inseridos";
         }
-
-        
-    }
+}
 
 ?>
+
+
+

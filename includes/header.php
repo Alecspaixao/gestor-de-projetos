@@ -1,7 +1,7 @@
 <?php 
   ob_start();
   session_start();
-  if(!isset($_SESSION['emailUser']) && (!isset($_SESSION['senhaLogin']))){
+  if(!isset($_SESSION['LoginUser']) && (!isset($_SESSION['senhaLogin']))){
     header("Location: ../index.php");
     exit;
   }
@@ -9,6 +9,30 @@
     session_destroy();
     header("Location: ../index.php");
   }
+
+?>
+
+<?php 
+
+include_once("../config/conexao.php");
+
+$usuarioLogado = $_SESSION['LoginUser'];
+
+$select = "SELECT * FROM tb_user WHERE email_user = :usuarioLogado OR nome_user = :usuarioLogado";
+
+$resultado = $conexao->prepare($select);
+
+$resultado->bindParam(':usuarioLogado', $usuarioLogado, PDO::PARAM_STR);
+
+$resultado->execute();
+
+if($resultado->rowCount() > 0){
+  $show = $resultado->fetch(PDO::FETCH_OBJ);
+
+  $id_user = $show->id_user;
+  $nome_user = $show->nome_user;
+  $email_user = $show->email_user;
+}
 
 ?>
 <!DOCTYPE html>
@@ -51,7 +75,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../paginas/conteudo/novo_projeto.php" class="nav-link">Criar Projeto</a>
+        <a href="../paginas/home.php?section=novo_projeto" class="nav-link">Criar Projeto</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="../paginas/calendar.html" class="nav-link">Calendário</a>
@@ -186,7 +210,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><?php echo $show->nome_user?></a>
         </div>
       </div>
 
