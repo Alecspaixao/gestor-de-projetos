@@ -14,23 +14,23 @@
 
             <div class="text-field">
                 <label for="usuario">Registre seu nome:</label>
-                <input type="text" name="name" placeholder="Nome">
+                <input type="text" name="name" placeholder="Nome" required>
             </div>
             <div class="text-field">
                 <label for="usuario">Registre seu e-mail:</label>
-                <input type="email" name="email" placeholder="E-mail">
+                <input type="email" name="email" placeholder="E-mail" required>
             </div>
             <div class="text-field">
                 <label for="usuario">Registre sua senha:</label>
-                <input type="password" name="password" placeholder="Senha">
+                <input type="password" name="password" placeholder="Senha" required>
             </div>
             <div class="text-field">
                 <label for="usuario">Confirme sua senha:</label>
-                <input type="password" name="passwordConfirm" placeholder="Repita sua senha">
+                <input type="password" name="passwordConfirm" placeholder="Repita sua senha" required>
             </div>
             <div class="text-field">
-                <label for="usuario">Confirme sua senha:</label>
-                <input type="file" name="foto" placeholder="Repita sua senha">
+                <label for="usuario">Registre sua foto(opicional):</label>
+                <input type="file" name="foto" placeholder="Foto">
             </div>
             <button class="btnLogin" name="btnRegister" type="submit">Registrar</button>
             <div class="message">
@@ -54,10 +54,10 @@
 
             if(isset($_FILES['foto'])){
 
-                if(!empty($_FILES['foto'])){
-                    $formatosP = array("png", "jpeg", "jpg", "gif");
+                if(!empty($_FILES['foto']['name'])){
+                    $allowedFormats = array("png", "jpeg", "jpg", "gif");
                     $extention = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
-                    if(in_array($extention, $formatosP)){
+                    if(in_array(strtolower($extention), $allowedFormats)){
                         $tmpFolder = $_FILES['foto']['tmp_name'];
                         $destiny = "dist/img/user/";
                         $userPhoto = uniqid() . ".$extention";
@@ -72,7 +72,7 @@
                         exit();
                     }
                 }else{
-                    $userPhoto = "default-banner.png";
+                    $userPhoto = "default-photo.png";
                 }  
             }
 
@@ -93,6 +93,7 @@
                     echo "<div> Não foi possivel efetuar o cadastro</div>";
                     header("Refresh: 3, register.php");
                 }
+                
             }catch(PDOException $err){
                 echo "ERRO DE PDO: ". $err;
             }

@@ -32,6 +32,7 @@ if($resultado->rowCount() > 0){
   $id_user = $show->id_user;
   $nome_user = $show->nome_user;
   $email_user = $show->email_user;
+  $foto_user = $show->foto_user;
 }
 
 ?>
@@ -76,6 +77,9 @@ if($resultado->rowCount() > 0){
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="../paginas/home.php?section=novo_projeto" class="nav-link">Criar Projeto</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="../paginas/home.php?section=atualizar_perfil" class="nav-link">Atualizar Perfil</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="../paginas/calendar.html" class="nav-link">Calendário</a>

@@ -2,12 +2,25 @@
 <?php
     include_once('../config/conexao.php');
     $timezone = new DateTime('now', new DateTimeZone('America/Fortaleza'));
+    
     echo $timezone->format('Y-m-d H:i:s');
-?>
+
+    $selectUltUp = "SELECT UltUpdate_projeto FROM tb_project WHERE id_user = :id_user";
+    $resultado = $conexao->prepare($selectUltUp);
+    $resultado->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+    $resultado->execute();
+
+    if($resultado->rowCount() > 0){
+        $show = $resultado->fetch(PDO::FETCH_OBJ);
+        $ultUpdate = $show->UltUpdate_projeto;
+        echo $ultUpdate;
+        echo date('d/m/Y');
+        }
+    ?>
     <div style="display: flex; margin-left: auto;">
 <form method="post" style="margin-left: auto;" enctype="multipart/form-data">
     <label for=":projectName">Nome do projeto:</label><br>
-    <input type="text" name=":projectName"><br>
+    <input type="text" name="projectName"><br>
 
     <label for="desc">Descrição do projeto:</label><br>
     <input type="text" name="desc"><br>
@@ -21,7 +34,7 @@
 <?php
     
 if(isset($_POST['btnCreate'])){
-    $projectName = $_POST[':projectName'];
+    $projectName = $_POST['projectName'];
     $projectDesc= $_POST['desc'];
     $id_user = $_POST['id_user'];
 
@@ -64,23 +77,25 @@ if(isset($_POST['btnCreate'])){
     }else{
         echo "foto nao enviada!!!!!";
     }
-        
+        try{
+            $insertProject = "INSERT INTO tb_project (nome_projeto, descricao_projeto, banner_projeto, id_user) VALUES (:projectName, :projectDesc, :projectBanner, :id_user)";
 
+            $resultado = $conexao->prepare($insertProject);
+            $resultado->bindParam(':projectName', $projectName, PDO::PARAM_STR);
+            $resultado->bindParam(':projectDesc', $projectDesc, PDO::PARAM_STR);
+            $resultado->bindParam(':projectBanner', $projectBanner, PDO::PARAM_STR);
+            $resultado->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+            $resultado->execute();
 
-        $insertProject = "INSERT INTO tb_project (nome_projeto, descricao_projeto, banner_projeto, id_user) VALUES (:projectName, :projectDesc, :projectBanner, :id_user)";
-
-        $resultado = $conexao->prepare(($insertProject));
-        $resultado->bindParam(':projectName', $projectName, PDO::PARAM_STR);
-        $resultado->bindParam(':projectDesc', $projectDesc, PDO::PARAM_STR);
-        $resultado->bindParam(':projectBanner', $projectBanner, PDO::PARAM_STR);
-        $resultado->bindParam(':id_user', $id_user, PDO::PARAM_INT);
-        $resultado->execute();
-
-        if($resultado->rowCount() > 0){
-            echo "dados inseridos com sucesso";
-        }else{
-            echo "dados nao inseridos";
+            if($resultado->rowCount() > 0){
+                echo "dados inseridos com sucesso";
+            }else{
+                echo "dados nao inseridos";
+            }
+        }catch(PDOException $err){
+            echo "ERRO DE PDO: ". $err;
         }
+        
 }
 
 ?>
