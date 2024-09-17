@@ -16,6 +16,10 @@
 
 <!-- jQuery -->
 <script src="../plugins/jquery/jquery.min.js"></script>
+<script src="../dist/js/jquery-3.7.1.min.js"></script>
+<script src="../dist/js/jquery.validate.js"></script>
+<script src="../dist/js/additional-methods.js"></script>
+<script src="../dist/js/localization/messages_pt_BR.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -48,3 +52,19 @@
 <script src="../dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
+
+<script>
+        jQuery(document).ready(function($){
+            $("#formRegister").validate({
+                rules:{
+                    name:{
+                        required: true
+                    },
+                    email:{
+                        required: true,
+                        email: true
+                    }
+                }
+            })
+        })
+    </script>

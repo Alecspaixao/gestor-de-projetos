@@ -18,9 +18,9 @@
         }
     ?>
     <div style="display: flex; margin-left: auto;">
-<form method="post" style="margin-left: auto;" enctype="multipart/form-data">
+<form method="post" style="margin-left: auto;" enctype="multipart/form-data" id="formPro">
     <label for=":projectName">Nome do projeto:</label><br>
-    <input type="text" name="projectName"><br>
+    <input type="text" name="projectName" id="name"><br>
 
     <label for="desc">Descrição do projeto:</label><br>
     <input type="text" name="desc"><br>
@@ -31,6 +31,23 @@
     <button type="submit" name="btnCreate">Criar</button>
 </form>
 </div>
+<script>
+                $(document).ready(function(){
+                    $("#formPro").validade({
+                        rules:{
+                            name:{
+                                required: true
+
+                            },
+                            email:{
+                                required: true,
+                                email: true
+                            }
+                        }
+
+                    })
+                })
+    </script>
 <?php
     
 if(isset($_POST['btnCreate'])){
@@ -42,7 +59,7 @@ if(isset($_POST['btnCreate'])){
         
 
         if (!empty($_FILES['banner']['name'])) {
-            $allowedFormats = array("png", "jpg", "jpeg", "gif");
+            $allowedFormats = array("png", "jpg", "jpeg");
             $extention = pathinfo($_FILES['banner']['name'], PATHINFO_EXTENSION);
 
             if (in_array(strtolower($extention),$allowedFormats)) {

@@ -10,15 +10,15 @@
     <main id="mainLogin">
         <section class="centerLogin">
             <h1>Faça login para continuar</h1>
-        <form method="post">
+        <form method="post" id="formLogin">
             <div class="text-field">
                 <label for="email">Usuário ou E-mail</label>
-                <input type="text" name="email" placeholder="Insira o usuário ou e-mail">
+                <input type="text" name="email" id="email" placeholder="Insira o usuário ou e-mail">
             </div>
 
             <div class="text-field">        
                 <label for="senha">Senha</label>
-                <input type="password" name="senha" placeholder="Insira sua senha">
+                <input type="password" name="senha" id="password" placeholder="Insira sua senha">
             </div>
             
             
@@ -66,5 +66,27 @@
 ?>
         </section>
     </main>
+    <script src="dist/js/jquery-3.7.1.min.js"></script>
+    <script src="dist/js/jquery.validate.js"></script>
+    <script src="dist/js/additional-methods.js"></script>
+    <script src="dist/js/localization/messages_pt_BR.min.js"></script>
+    <script src="dist/js/localization/messages_pt_BR.js"></script>
+<script>
+        jQuery(document).ready(function($){
+            $("#formLogin").validate({
+                rules:{
+                    email:{
+                        required: true,
+                        maxlength: 150,
+                    },
+                    password:{
+                        required: true,
+                        rangelength: [6, 150],
+                    },
+                }
+            })
+        })
+    </script>
+    
 </body>
 </html>

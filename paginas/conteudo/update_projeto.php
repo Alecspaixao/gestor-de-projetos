@@ -1,4 +1,18 @@
+<?php 
 
+    include_once("../config/conexao.php");
+    $select = "SELECT nome_projeto, banner_projeto, descricao_projeto FROM tb_project WHERE id_user=:id_user";
+        $resultado = $conexao->prepare($select);
+        $resultado->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+        $resultado->execute();
+        if($resultado->rowCount() > 0){
+            $fetch = $resultado->fetch(PDO::FETCH_OBJ);
+            $old_name = $fetch->nome_projeto;
+            $old_desc = $fetch->descricao_projeto;
+            $old_banner = $fetch->banner_projeto;
+        }
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,72 +24,50 @@
 <body>
     <main id="mainLogin">
         <section class="centerLogin">
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" >
             <h1>Atualize seu perfil</h1>
 
-            <div class="text-field">
-                <label for="usuario">Atualize seu nome:</label>
-                <input type="text" name="name" placeholder="Nome" value=<?php echo $nome_user?>>
+            <div class="text-field" class="form-group" class="form-control">
+                <label for="usuario">Atualize o nome do projeto:</label>
+                <input type="text" name="name" placeholder="Nome" value=<?php echo $old_name?>>
             </div>
-            <div class="text-field">
-                <label for="usuario">Atualize seu e-mail:</label>
-                <input type="email" name="email" placeholder="E-mail" value=<?php echo $email_user?>>
+            <div class="text-field" class="form-group" class="form-control">
+                <label for="usuario">Atualize a descrição:</label>
+                <input type="text" name="desc" placeholder="Descrição" value=<?php echo $old_desc?>>
             </div>
-            <div class="text-field">
-                <label for="usuario">Atualize sua senha:</label>
-                <input type="password" name="password" placeholder="Senha">
+            <div class="text-field" class="form-control">
+                <label for="usuario">Atualize o banner(opcional)</label>
+                <input type="file" name="banner" placeholder="Senha">
             </div>
-            <div class="text-field">
-                <label for="usuario">Atualize sua senha:</label>
-                <input type="password" name="passwordConfirm" placeholder="Repita sua senha">
-            </div>
-            <div class="text-field">
-                <label for="usuario">Atualize sua senha:</label>
-                <input type="file" name="foto" placeholder="Repita sua senha">
-            </div>
-            <button class="btnLogin" name="btnUpdate" type="submit">Registrar</button>
+            <button class="btnUpdate" name="btnUpdate" type="submit">Atualizar</button>
             <div class="message">
             </form>
-                <p>Enviaremos a você um e-mail de verificação com código. </p>
-                <p>Acesse e insira-o na próxima página.</p>
-                <a href="index.php">Voltar ao Login</a>
+                <a href="index.php">Cancelar/a>
             </div>
         
 
 <?php
-    include_once("../config/conexao.php");
 
     if(isset($_POST["btnUpdate"])){
         $new_name = $_POST["name"];
-        $new_email = $_POST["email"];
+        $new_desc = $_POST["desc"];
 
-        $select = "SELECT nome_projeto, descricao_projeto FROM tb_project WHERE id_user=:id_user";
-        $resultado = $conexao->prepare($select);
-        $resultado->bindParam(':id_user', $id_user, PDO::PARAM_INT);
-        $resultado->execute();
-        if($resultado->rowCount() > 0){
-            $fetch = $resultado->fetch(PDO::FETCH_OBJ);
-            $old_name = $fetch->nome_projeto;
-            $old_desc = $fetch->descricao_projeto;
-        }
-        if($new_password == $passwordConfirm){
-            $new_password = password_hash($new_password, PASSWORD_DEFAULT);
 
             if(isset($_FILES['banner'])){
 
                 if(!empty($_FILES['banner']['name'])){
-                    $allowedFormats = array("png", "jpeg", "jpg", "gif");
+                    $allowedFormats = array("png", "jpeg", "jpg");
                     $extention = pathinfo($_FILES['banner']['name'], PATHINFO_EXTENSION);
 
                     if(in_array(strtolower($extention), $allowedFormats)){
                         $tmpFolder = $_FILES['banner']['tmp_name'];
-                        $destiny = "../dist/img/user/";
+                        $destiny = "../dist/img/banner/";
                         $newBanner= uniqid() . ".$extention";
 
-                        if(file_exists($destiny . $foto_user)){
-                            unlink($destiny . $foto_user);
+                        if(file_exists($destiny . $old_banner)){
+                            unlink($destiny . $old_banner);
                         }
-                        if(move_uploaded_file($tmpFolder, $destiny . $newUserPhoto)){
+                        if(move_uploaded_file($tmpFolder, $destiny . $newBanner)){
 
                         }else{
                             echo"Falha no upload de arquivo!";
@@ -86,43 +78,37 @@
                         exit();
                     }
                 }else{
-                    $newBanner= $foto_user;
+                    $newBanner= $old_banner;
                 }  
             }
 
             try{
-                $register = "UPDATE tb_user SET nome_user=:new_name, email_user=:new_email, senha_user=:new_password, foto_user=:newBannerWHERE id_user=:user_id";
+                $register = "UPDATE tb_project SET nome_projeto=:new_name, descricao_projeto=:new_desc, banner_projeto=:newBanner WHERE id_user=:user_id";
         
                 $resultado = $conexao->prepare($register);
                 $resultado->bindParam(':user_id', $id_user, PDO::PARAM_INT);
                 $resultado->bindParam(':new_name', $new_name, PDO::PARAM_STR);
-                $resultado->bindParam(':new_email', $new_email, PDO::PARAM_STR);
-                $resultado->bindParam(':new_password', $new_password, PDO::PARAM_STR);
-                $resultado->bindParam(':newUserPhoto', $newUserPhoto, PDO::PARAM_STR);
+                $resultado->bindParam(':new_desc', $new_desc, PDO::PARAM_STR);
+                $resultado->bindParam(':newBanner', $newBanner, PDO::PARAM_STR);
                 $resultado->execute();
         
                 if($resultado->rowCount() > 0){
-                    echo "<div>Usuario atualizado com sucesso!</div>";
-                    header("Refresh: 3, ../index.php");
+                    echo "<div>Projeto atualizado com sucesso!</div>";
+                    header("Refresh: 2, home.php");
                 }else{
-                    echo "<div>Não foi possivel efetuar o cadastro</div>";
-                    header("Refresh: 3, home.php");
+                    echo "<div>Não foi possivel atualizar</div>";
+                    header("Refresh: 2, home.php");
                 }
-                if ($new_email !== $old_email || $new_password !== $old_password) {
-                    header("Location: ../index.php"); // Redireciona para sair se email ou senha foram alterados
+                if ($new_name !== $new_name || $new_desc !== $old_desc) {
+                    header("Location: home.php"); // Redireciona para sair se email ou senha foram alterados
                     exit(); // Garante que o redirecionamento ocorra
                 } else {
-                    header("Refresh: 3, home.php?atualizar_perfil"); // Redireciona de volta ao perfil após 3 segundos
+                    header("Refresh: 3, home.php"); // Redireciona de volta ao perfil após 3 segundos
                     exit(); // Garante que o redirecionamento ocorra
                 }
             }catch(PDOException $err){
                 echo "ERRO DE PDO: ". $err;
             }
-            
-        }else{
-            echo "<div>Senhas nao batem!</div>";
-            exit();
-        } 
     }
 ?>
 </body>

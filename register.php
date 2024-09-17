@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +9,24 @@
 <body>
     <main id="mainLogin">
         <section class="centerLogin">
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" id="formRegister">
             <h1>Resgistre-se para continuar</h1>
 
             <div class="text-field">
                 <label for="usuario">Registre seu nome:</label>
-                <input type="text" name="name" placeholder="Nome" required>
+                <input type="text" name="name" id="name" placeholder="Nome">
             </div>
             <div class="text-field">
                 <label for="usuario">Registre seu e-mail:</label>
-                <input type="email" name="email" placeholder="E-mail" required>
+                <input type="email" name="email" id="email" placeholder="E-mail">
             </div>
             <div class="text-field">
                 <label for="usuario">Registre sua senha:</label>
-                <input type="password" name="password" placeholder="Senha" required>
+                <input type="password" name="password" id="password" placeholder="Senha">
             </div>
             <div class="text-field">
                 <label for="usuario">Confirme sua senha:</label>
-                <input type="password" name="passwordConfirm" placeholder="Repita sua senha" required>
+                <input type="password" name="passwordConfirm" id="confirmPwd" placeholder="Repita sua senha">
             </div>
             <div class="text-field">
                 <label for="usuario">Registre sua foto(opicional):</label>
@@ -106,5 +106,36 @@
 ?>
         </section>
     </main>
+    <script src="dist/js/jquery-3.7.1.min.js"></script>
+    <script src="dist/js/jquery.validate.js"></script>
+    <script src="dist/js/additional-methods.js"></script>
+    <script src="dist/js/localization/messages_pt_BR.min.js"></script>
+    <script src="dist/js/localization/messages_pt_BR.js"></script>
+<script>
+        jQuery(document).ready(function($){
+            $("#formRegister").validate({
+                rules:{
+                    name:{
+                        required: true,
+                        maxlength: 100
+                    },
+                    email:{
+                        required: true,
+                        email: true,
+                        maxlength: 150
+                    },
+                    password:{
+                        required:true,
+                        rangelength: [6, 150]
+                    },
+                    confirmPwd: {
+                        required: true,
+                        equalTo: '#password'
+                    }
+                }
+            })
+        })
+    </script>
+    
 </body>
 </html>
