@@ -1,3 +1,4 @@
+/*EStilo Geral*/
 *{
     font-family: poppinsregular;
     margin: 0;
@@ -9,6 +10,9 @@ body{
     background-color: rgb(34, 34, 34);
     height: 100vh;
 }
+.flex{
+    display:flex;
+}
 
 .interface{
     max-width: 1280px;
@@ -16,7 +20,7 @@ body{
 }
 
 header{
-    padding: 20px 2%;
+    padding: 40px 4%;
 }
 
 header > .interface{
@@ -66,5 +70,47 @@ header nav ul{
 
 header nav ul li{
     display: inline-block;
-    padding: 0px 20px;
+    padding: 0px 40px;
+}
+
+/*ESTILIZAÇÃO DO TOPO DO SITE*/
+section.topo-site{
+    padding: 40px 4%;
+}
+
+section.topo-site .flex{
+    align-items: center;
+    justify-content: center;
+    gap: 90px /*Distanciamento entre elemnentos*/
+}
+.topo-site h1{
+    font-family: poppinsbold;
+    color: white;
+    font-size: 38px;
+    line-height: 40px;
+}
+
+.topo-site .txt-topo-site h1 span{
+    color: blueviolet;
+}
+
+
+.topo-site .txt-topo-site p{
+    color: white;
+    margin: 40px 0;
+}
+
+.topo-site .img-topo-site img{
+    position: relative;
+    animation: flutuar 2s ease-in-out infinite alternate;
+    width: 500px;
+}
+
+@keyframes flutuar{
+    0%{
+        top: 0;
+    }
+    100%{
+        top: 30px;
+    }
 }
