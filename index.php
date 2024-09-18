@@ -52,10 +52,10 @@
                     echo "<div>Logado com sucesso!</div>";
                     header("Refresh: 1, paginas/home.php");
                 }else{
-                    echo "<div>Não foi possivel fazer login!!</div>"; 
+                    echo "<div style='align-items: center;'>Email ou Senha incorretos</div>";
                 }
             }else{
-                echo "<div style='align-items: center;'>Email ou Senha incorretos</div>";
+                echo "<div>Não foi possivel fazer login!!</div>"; 
                 header("Refresh: 3, index.php");
             }
         }catch(PDOException $err){

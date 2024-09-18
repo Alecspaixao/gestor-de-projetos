@@ -1,7 +1,7 @@
 <?php 
 
     include_once("../config/conexao.php");
-    $select = "SELECT nome_projeto, banner_projeto, descricao_projeto FROM tb_project WHERE id_user=:id_user";
+    $select = "SELECT * FROM tb_project WHERE id_user=:id_user";
         $resultado = $conexao->prepare($select);
         $resultado->bindParam(':id_user', $id_user, PDO::PARAM_INT);
         $resultado->execute();
@@ -25,7 +25,7 @@
     <main id="mainLogin">
         <section class="centerLogin">
             <form method="post" enctype="multipart/form-data" >
-            <h1>Atualize seu perfil</h1>
+            <h1>Altere seu Projeto</h1>
 
             <div class="text-field" class="form-group" class="form-control">
                 <label for="usuario">Atualize o nome do projeto:</label>
@@ -47,6 +47,10 @@
         
 
 <?php
+
+if(isset($_GET['idUpdate'])){
+    $id_project = $_GET['idUpdate'];
+
 
     if(isset($_POST["btnUpdate"])){
         $new_name = $_POST["name"];
@@ -83,10 +87,10 @@
             }
 
             try{
-                $register = "UPDATE tb_project SET nome_projeto=:new_name, descricao_projeto=:new_desc, banner_projeto=:newBanner WHERE id_user=:user_id";
+                $register = "UPDATE tb_project SET nome_projeto=:new_name, descricao_projeto=:new_desc, banner_projeto=:newBanner WHERE id_project = :id_project";
         
                 $resultado = $conexao->prepare($register);
-                $resultado->bindParam(':user_id', $id_user, PDO::PARAM_INT);
+                $resultado->bindParam(':id_project', $id_project, PDO::PARAM_INT);
                 $resultado->bindParam(':new_name', $new_name, PDO::PARAM_STR);
                 $resultado->bindParam(':new_desc', $new_desc, PDO::PARAM_STR);
                 $resultado->bindParam(':newBanner', $newBanner, PDO::PARAM_STR);
@@ -110,6 +114,7 @@
                 echo "ERRO DE PDO: ". $err;
             }
     }
+}else{header("Location: ../home.php");}
 ?>
 </body>
 </html>

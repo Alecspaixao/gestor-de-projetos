@@ -128,7 +128,7 @@
                         required:true,
                         rangelength: [6, 150]
                     },
-                    confirmPwd: {
+                    confirmPwd:{
                         required: true,
                         equalTo: '#password'
                     }

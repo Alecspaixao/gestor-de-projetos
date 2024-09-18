@@ -87,6 +87,9 @@ if($resultado->rowCount() > 0){
       <li class="nav-item d-none d-sm-inline-block">
         <a href="?sair" style="background-color: red; color: black" class="nav-link">Sair</a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a <?php echo 'href="../paginas/conteudo/del-contato.php?idDel=' . $id_user . '"' ?> onclick="return confirm('AVISO! Esta ação apagará sua conta e projetos, e não pode ser desfeita.')" style="background-color: red; color: black" class="nav-link">Deletar Conta</a>
+      </li>
     </ul>
 
     <!-- SEARCH FORM -->
@@ -211,7 +214,14 @@ if($resultado->rowCount() > 0){
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <?php
+            if($foto_user == 'default-photo.png'){
+              echo '<img src="../dist/img/user/default-user/default-photo.png" class="img-circle elevation-2 ">';
+            }else{
+              echo '<img src="../dist/img/user/' . $foto_user . '">';
+
+            }
+          ?>
         </div>
         <div class="info">
           <a href="#" class="d-block"><?php echo $show->nome_user?></a>
