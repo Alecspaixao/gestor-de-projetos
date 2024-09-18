@@ -15,5 +15,6 @@
     }
 
   }
+  include_once('conteudo/cadastroProjetos.php')
   include_once('../includes/footer.php');
 
