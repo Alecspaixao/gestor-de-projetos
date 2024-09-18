@@ -1,4 +1,12 @@
-  <!-- Content Wrapper. Contains page content -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -99,3 +107,5 @@
     </section>
     <!-- /.content -->
   </div>
+</body>
+</html>
