@@ -81,7 +81,7 @@
                     },
                     password:{
                         required: true,
-                        rangelength: [6, 150],
+                        rangelength: [6, 40],
                     },
                 }
             })

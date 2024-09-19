@@ -146,9 +146,9 @@ if(isset($_POST['btnCreate'])){
             $resultado->execute();
 
             if($resultado->rowCount() > 0){
-                header('Location: home.php?section=novo_projeto');
+                header('Location: home.php');
             }else{
-                echo "dados nao inseridos";
+                echo "ERRO AO CRIAR PROJETO";
             }
         }catch(PDOException $err){
             echo "ERRO DE PDO: ". $err;

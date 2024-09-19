@@ -2,12 +2,12 @@
   ob_start();
   session_start();
   if(!isset($_SESSION['LoginUser']) && (!isset($_SESSION['senhaLogin']))){
-    header("Location: ../index.php");
+    header("Location: ../login.php");
     exit;
   }
   if(isset($_REQUEST['sair'])){
     session_destroy();
-    header("Location: ../index.php");
+    header("Location: ../login.php");
   }
 
 ?>
@@ -76,7 +76,7 @@ if($resultado->rowCount() > 0){
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../index3.html" class="nav-link">Criar Projeto</a>
+        <a href="?section=novo_projeto" class="nav-link">Criar Projeto</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="../paginas/calendar.html" class="nav-link">Calendário</a>
@@ -169,12 +169,12 @@ if($resultado->rowCount() > 0){
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a <?php echo 'href="?section=update_perfil&idUpdate=' . $id_user . '"'?> class="dropdown-item">
             <i class="fas fa-envelope mr-2"></i> ALterar Perfil
             <!-- Espaço para o item aqui -->
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="?sair" class="dropdown-item">
             <i class="fas fa-users mr-2"></i> Logout
 
           </a>
@@ -192,8 +192,8 @@ if($resultado->rowCount() > 0){
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
+      <!--<img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8"> -->
       <span class="brand-text font-weight-light">Gestor de Projetos</span>
     </a>
 
