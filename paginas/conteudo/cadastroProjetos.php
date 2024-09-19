@@ -30,7 +30,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-                <form role="form" method="post">
+                <form role="form" method="post" enctype="multipart/form-data">
                   <div class="card-body">
 
                   <!-- Nome do Projeto -->
@@ -118,10 +118,10 @@ if(isset($_POST['btnCreate'])){
         
 
         if (!empty($_FILES['banner']['name'])) {
-            $allowedFormats = array("png", "jpg", "jpeg");
-            $extention = pathinfo($_FILES['banner']['name'], PATHINFO_EXTENSION);
+            $allowedFormats = array("png", "jpg", "jpeg", "JPG");
+            $extention = pathinfo($_FILES['banner']['name'  ], PATHINFO_EXTENSION);
 
-            if (in_array(strtolower($extention),$allowedFormats)) {
+            if (in_array(strtolower($extention), $allowedFormats)) {
                 $destiny = "../dist/img/banner/";
                 $tmpFolder = $_FILES['banner']['tmp_name'];
                 $projectBanner = uniqid() . ".$extention";

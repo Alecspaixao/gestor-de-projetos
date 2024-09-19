@@ -56,7 +56,7 @@
                 }
             }else{
                 echo "<div>Não foi possivel fazer login!!</div>"; 
-                header("Refresh: 3, index.php");
+                header("Refresh: 3, login.php");
             }
         }catch(PDOException $err){
             echo 'ERRO DE PDO: '. $err->getMessage(); 

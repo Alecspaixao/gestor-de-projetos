@@ -8,40 +8,86 @@
     <link rel="stylesheet" href="../../dist/css/styleLogin/styleRegister.css">
 </head>
 <body>
-    <main id="mainLogin">
-        <section class="centerLogin">
-            <form method="post" enctype="multipart/form-data">
-            <h1>Atualize seu perfil</h1>
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>General Form</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">General Form</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
-            <div class="text-field">
-                <label for="usuario">Atualize seu nome:</label>
-                <input type="text" name="name" placeholder="Nome" value=<?php echo $nome_user?>>
-            </div>
-            <div class="text-field">
-                <label for="usuario">Atualize seu e-mail:</label>
-                <input type="email" name="email" placeholder="E-mail" value=<?php echo $email_user?>>
-            </div>
-            <div class="text-field">
-                <label for="usuario">Atualize sua senha:</label>
-                <input type="password" name="password" placeholder="Senha">
-            </div>
-            <div class="text-field">
-                <label for="usuario">Atualize sua senha:</label>
-                <input type="password" name="passwordConfirm" placeholder="Repita sua senha">
-            </div>
-            <div class="text-field">
-                <label for="usuario">Atualize sua senha:</label>
-                <input type="file" name="foto" placeholder="Repita sua senha">
-            </div>
-            <button class="btnLogin" name="btnUpdate" type="submit">Registrar</button>
-            <div class="message">
-            </form>
-                <p>Enviaremos a você um e-mail de verificação com código. </p>
-                <p>Acesse e insira-o na próxima página.</p>
-                <a href="index.php">Voltar ao Login</a>
-            </div>
-        
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Atualizar Perfil</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+                <form role="form" method="post" enctype="multipart/form-data">
+                  <div class="card-body">
 
+                  <!-- Nome do Projeto -->
+                    <div class="form-group">
+                      <label for="projectName">Nome</label>
+                      <input type="text" class="form-control" id="projectName" name="name" placeholder="Digite o nome" required>
+                    </div>
+
+                  <!-- Descrição do Projeto -->
+                  <div class="form-group">
+                      <label for="projectDescription">Email</label>
+                      <input class="form-control" id="projectDescription" name="email" rows="3" placeholder="Digite a descrição do projeto" required></input>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="projectDescription">Senha</label>
+                      <input class="form-control" id="projectDescription" name="password" rows="3" placeholder="Digite a descrição do projeto" required></input>
+                  </div>
+
+                  <!-- Categoria -->
+                  <div class="form-group">
+                      <label for="projectCategory">Categoria</label>
+                      <select class="form-control" id="projectCategory" name="category" required>
+                          <option value="" disabled selected>Escolha a categoria</option>
+                          <option value="Trabalho">Trabalho</option>
+                          <option value="Faculdade">Faculdade</option>
+                          <option value="Projeto Pessoal">Projeto Pessoal</option>
+                          <!-- Adicione mais opções conforme necessário -->
+                      </select>
+                  </div>
+
+                  <!-- Arquivo -->
+                  <div class="form-group">
+                      <label for="projectFile">Foto de Perfil</label>
+                      <div class="input-group">
+                          <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="banner" id="projectFile">
+                              <label class="custom-file-label" for="projectFile">Escolher arquivo</label>
+                          </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Botão de Enviar -->
+                  <button type="submit" class="btn btn-primary" name="btnCreate">Cadastrar Projeto</button>
+                  </div>
+              </form>
 <?php
     include_once("../config/conexao.php");
 
@@ -127,5 +173,22 @@
         } 
     }
 ?>
+ </div>
+            <!-- /.card -->
+
+          
+
+          
+
+          <!--/.col (left) -->
+          <!-- right column -->
+          
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
 </body>
 </html>

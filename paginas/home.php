@@ -12,7 +12,7 @@
     elseif($section == 'del_projeto'){
       include_once('conteudo/del-projeto.php');
     }
-    elseif($section == 'atualizar_perfil'){
+    elseif($section == 'update_perfil'){
       include_once('conteudo/update_perfil.php');
     }
     else{

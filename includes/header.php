@@ -81,12 +81,6 @@ if($resultado->rowCount() > 0){
       <li class="nav-item d-none d-sm-inline-block">
         <a href="../paginas/calendar.html" class="nav-link">Calendário</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="?sair" style="background-color: red; color: black" class="nav-link">Sair</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a <?php echo 'href="../paginas/conteudo/del-contato.php?idDel=' . $id_user . '"' ?> onclick="return confirm('AVISO! Esta ação apagará sua conta e projetos, e não pode ser desfeita.')" style="background-color: red; color: black" class="nav-link">Deletar Conta</a>
-      </li>
     </ul>
 
     <!-- SEARCH FORM -->
@@ -206,8 +200,7 @@ if($resultado->rowCount() > 0){
             if($foto_user == 'default-photo.png'){
               echo '<img src="../dist/img/user/default-user/default-photo.png" class="img-circle elevation-2 ">';
             }else{
-              echo '<img src="../dist/img/user/' . $foto_user . '">';
-
+              echo '<img src="../dist/img/user/' . $foto_user . '" class="img-circle elevation-2>';
             }
           ?>
         </div>

@@ -88,7 +88,7 @@
         
                 if($resultado->rowCount() > 0){
                     echo "<div> Usuario cadastrado com sucesso!</div>";
-                    header("Refresh: 3, index.php");
+                    header("Refresh: 3, login.php");
                 }else{
                     echo "<div> Não foi possivel efetuar o cadastro</div>";
                     header("Refresh: 3, register.php");

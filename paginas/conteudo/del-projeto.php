@@ -23,7 +23,7 @@
                 $resultado-> execute();
         
                 if($resultado->rowCount() > 0){
-                    header("Location: home.php?section=novo_projeto");
+                    header("Location: home.php");
                 }else{
                     echo "ERRO AO DELETAR";
                 }
