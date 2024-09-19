@@ -5,9 +5,10 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+.topo-site{
+    background-color: black;
+}
 body{
-    background-color: rgb(34, 34, 34);
     height: 100vh;
 }
 .flex{
@@ -20,7 +21,7 @@ body{
 }
 
 header{
-    padding: 40px 4%;
+    padding: 20px 4%;
 }
 
 header > .interface{
@@ -29,7 +30,7 @@ header > .interface{
     justify-content: space-between;
 }
 
-h2{
+header>h2{
     color: white;
     line-height: 25px;
 }
@@ -73,6 +74,12 @@ header nav ul li{
     padding: 0px 40px;
 }
 
+h2.titulo{
+    color: black;
+    font-size: 38px;
+}
+h2 > 
+
 /*ESTILIZAÇÃO DO TOPO DO SITE*/
 section.topo-site{
     padding: 40px 4%;
@@ -113,4 +120,16 @@ section.topo-site .flex{
     100%{
         top: 30px;
     }
+}
+
+/*ESTILIZAÇÃO DA SEÇÃO DE SERVIÇOS*/
+section.servicos{
+    padding: 40px 4%;
+    background-color: rgb(245, 245, 245);
+}
+
+section.servicos h2{
+    color: black;
+    text-align: center;
+    margin-bottom: 40px;
 }
