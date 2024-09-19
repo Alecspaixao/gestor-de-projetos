@@ -1,14 +1,41 @@
 <?php 
   ob_start();
   session_start();
-  if(!isset($_SESSION['emailUser']) && (!isset($_SESSION['senhaLogin']))){
-    header("Location: ../index.php");
+  if(!isset($_SESSION['LoginUser']) && (!isset($_SESSION['senhaLogin']))){
+    header("Location: ../login.php");
     exit;
   }
-  
+  if(isset($_REQUEST['sair'])){
+    session_destroy();
+    header("Location: ../login.php");
+  }
 
 ?>
 
+<?php 
+
+include_once("../config/conexao.php");
+
+$usuarioLogado = $_SESSION['LoginUser'];
+
+$select = "SELECT * FROM tb_user WHERE email_user = :usuarioLogado OR nome_user = :usuarioLogado";
+
+$resultado = $conexao->prepare($select);
+
+$resultado->bindParam(':usuarioLogado', $usuarioLogado, PDO::PARAM_STR);
+
+$resultado->execute();
+
+if($resultado->rowCount() > 0){
+  $show = $resultado->fetch(PDO::FETCH_OBJ);
+
+  $id_user = $show->id_user;
+  $nome_user = $show->nome_user;
+  $email_user = $show->email_user;
+  $foto_user = $show->foto_user;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt_br">
 <head>
@@ -49,10 +76,16 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../paginas/conteudo/cadastroProjetos.php" class="nav-link">Criar Projeto</a>
+        <a href="?section=novo_projeto" class="nav-link">Criar Projeto</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="../paginas/calendar.html" class="nav-link">Calendário</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="?sair" style="background-color: red; color: black" class="nav-link">Sair</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a <?php echo 'href="../paginas/conteudo/del-contato.php?idDel=' . $id_user . '"' ?> onclick="return confirm('AVISO! Esta ação apagará sua conta e projetos, e não pode ser desfeita.')" style="background-color: red; color: black" class="nav-link">Deletar Conta</a>
       </li>
     </ul>
 
@@ -136,12 +169,12 @@
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a <?php echo 'href="?section=update_perfil&idUpdate=' . $id_user . '"'?> class="dropdown-item">
             <i class="fas fa-envelope mr-2"></i> ALterar Perfil
             <!-- Espaço para o item aqui -->
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="?sair" class="dropdown-item">
             <i class="fas fa-users mr-2"></i> Logout
 
           </a>
@@ -159,8 +192,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
+      <!--<img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8"> -->
       <span class="brand-text font-weight-light">Gestor de Projetos</span>
     </a>
 
@@ -169,10 +202,17 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <?php
+            if($foto_user == 'default-photo.png'){
+              echo '<img src="../dist/img/user/default-user/default-photo.png" class="img-circle elevation-2 ">';
+            }else{
+              echo '<img src="../dist/img/user/' . $foto_user . '">';
+
+            }
+          ?>
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><?php echo $show->nome_user?></a>
         </div>
       </div>
 

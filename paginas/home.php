@@ -1,20 +1,27 @@
 <?php
   include_once('../includes/header.php');
   if(isset($_GET['section'])){
-    if($_GET['section' == 'perfil']){
-      include_once('../paginas/conteudo/perfil.php');
+    $section = $_GET['section'];
+    
+    if($section == 'novo_projeto'){
+      include_once('conteudo/cadastroProjetos.php');
     }
-    elseif($_GET['section' == 'update_perfil.php']){
-      include_once('../paginas/conteudo/update_perfil.php');
+    elseif($section == 'update_projeto'){
+      include_once('conteudo/update_projeto.php');
     }
-    elseif($_GET['section' == 'novo_projeto']){
-      include_once('../paginas/conteudo/novo_projeto.php');
+    elseif($section == 'del_projeto'){
+      include_once('conteudo/del-projeto.php');
     }
-    elseif($_GET['section' == 'update_projeto']){
-      include_once('../paginas/conteudo/update_projeto.php');
+    elseif($section == 'atualizar_perfil'){
+      include_once('conteudo/update_perfil.php');
     }
+    else{
+      include_once('conteudo/test_view.php');
+
+    }
+  }else{
+    include_once('conteudo/test_view.php');
 
   }
-  include_once('conteudo/cadastroProjetos.php')
+  
   include_once('../includes/footer.php');
-
