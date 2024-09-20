@@ -35,7 +35,7 @@
     }
     include_once('config/conexao.php');
     if(isset($_POST['btnLogin'])){
-        $optionLogin = filter_input(INPUT_POST,'email', FILTER_SANITIZE_EMAIL);
+        $optionLogin = filter_input(INPUT_POST,'email', FILTER_DEFAULT);
         $senhaLogin = filter_input(INPUT_POST,'senha', FILTER_DEFAULT);
 
         $select = "SELECT * FROM tb_user WHERE email_user = :optionLogin OR nome_user = :optionLogin";

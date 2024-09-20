@@ -10,6 +10,7 @@
             $fetch = $resultado->fetch(PDO::FETCH_OBJ);
             $old_name = $fetch->nome_projeto;
             $old_desc = $fetch->descricao_projeto;
+            $old_category = $fetch->categoria_projeto;
             $old_banner = $fetch->banner_projeto;
         }
 
@@ -63,19 +64,19 @@
                     <input type="text" class="form-control" value=<?php echo "$id_user" ?> name="id_user" hidden required>
 
                       <label for="projectName">Nome do Projeto</label>
-                      <input type="text" class="form-control" id="projectName" value=<?php echo $old_name ?> name="projectName" placeholder="Digite o nome do projeto" required>
+                      <input type="text" class="form-control" id="projectName" value=<?php echo $old_name ?> name="projectName" placeholder="Digite o nome do projeto">
                     </div>
 
                   <!-- Descrição do Projeto -->
                   <div class="form-group">
                       <label for="projectDescription">Descrição</label>
-                      <textarea class="form-control" id="projectDescription" name="desc" rows="3" placeholder="Digite a descrição do projeto" required></textarea>
+                      <textarea class="form-control" id="projectDescription" name="desc" rows="3" placeholder="Digite a descrição do projeto"></textarea>
                   </div>
 
                   <!-- Categoria -->
                   <div class="form-group">
                       <label for="projectCategory">Categoria</label>
-                      <select class="form-control" id="projectCategory" name="category" required>
+                      <select class="form-control" id="projectCategory" name="category">
                           <option value="" disabled selected>Escolha a categoria</option>
                           <option value="Trabalho">Trabalho</option>
                           <option value="Faculdade">Faculdade</option>
@@ -99,31 +100,22 @@
                   </div>
 
                   <!-- Botão de Enviar -->
-                  <button type="submit" class="btn btn-primary" name="btnCreate">Cadastrar Projeto</button>
+                  <button type="submit" class="btn btn-primary" name="btnUpdate">Cadastrar Projeto</button>
                   </div>
-
-                  <!-- Checkbox para Confirmar -->
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="terms" required>
-                    <label class="form-check-label" for="terms">Eu li e aceito os termos e condições</label>
-                  </div>
-
               </form>
               <script src="dist/js/jquery-3.7.1.min.js"></script>
-<script src="dist/js/jquery.validate.js"></script>
-<script src="dist/js/additional-methods.js"></script>
-<script src="dist/js/localization/messages_pt_BR.min.js"></script>
-<script src="dist/js/localization/messages_pt_BR.js"></script>
-<script>
+              <script src="dist/js/jquery.validate.js"></script>
+              <script src="dist/js/additional-methods.js"></script>
+              <script src="dist/js/localization/messages_pt_BR.min.js"></script>
+              <script src="dist/js/localization/messages_pt_BR.js"></script>
+              <script>
                 $(document).ready(function(){
                     $("#formPro").validade({
                         rules:{
                             name:{
-                                required: true,
                                 maxlength: 45
                             },
                             desc:{
-                                required: true,
                                 maxlength: 1000
                             }
                         }
@@ -138,46 +130,55 @@ if(isset($_GET['idUpdate'])){
 
 
     if(isset($_POST["btnUpdate"])){
-        $new_name = $_POST["name"];
+        $new_name = $_POST["projectName"];
         $new_desc = $_POST["desc"];
-
-
+        $new_category = $_POST["category"];
+    
             if(isset($_FILES['banner'])){
 
-                if(!empty($_FILES['banner']['name'])){
-                    $allowedFormats = array("png", "jpeg", "jpg");
-                    $extention = pathinfo($_FILES['banner']['name'], PATHINFO_EXTENSION);
+              if(!empty($_FILES['banner']['name'])){
+                  $allowedFormats = array("png", "jpeg", "jpg");
+                  $extention = pathinfo($_FILES['banner']['name'], PATHINFO_EXTENSION);
 
-                    if(in_array(strtolower($extention), $allowedFormats)){
-                        $tmpFolder = $_FILES['banner']['tmp_name'];
-                        $destiny = "../dist/img/banner/";
-                        $newBanner= uniqid() . ".$extention";
+                  if(in_array(strtolower($extention), $allowedFormats)){
+                      $tmpFolder = $_FILES['banner']['tmp_name'];
+                      $destiny = "../dist/img/banner/";
+                      $newBanner= uniqid() . ".$extention";
 
-                        if(file_exists($destiny . $old_banner)){
-                            unlink($destiny . $old_banner);
-                        }
-                        if(move_uploaded_file($tmpFolder, $destiny . $newBanner)){
+                      if(file_exists($destiny . $old_banner)){
+                          unlink($destiny . $old_banner);
+                      }
+                      if(move_uploaded_file($tmpFolder, $destiny . $newBanner)){
 
-                        }else{
-                            echo"Falha no upload de arquivo!";
-                            exit();
-                        }
-                    }else{
-                        echo"Formato nao permitido!";
-                        exit();
-                    }
-                }else{
-                    $newBanner= $old_banner;
-                }  
+                      }else{
+                          echo"Falha no upload de arquivo!";
+                          exit();
+                      }
+                  }else{
+                      echo"Formato nao permitido!";
+                      exit();
+                  }
+              }else{$newBanner= $old_banner;}
+                
+            }
+            if(empty($_POST['projectName'])){
+              $new_name = $old_name;
+            }
+            if(empty($_POST['desc'])){
+              $new_desc = $old_desc;
+            }
+            if(empty($_POST['category'])){
+              $new_category = $old_category;
             }
 
             try{
-                $update = "UPDATE tb_project SET nome_projeto=:new_name, descricao_projeto=:new_desc, banner_projeto=:newBanner WHERE id_project = :id_project";
+                $update = "UPDATE tb_project SET nome_projeto=:new_name, descricao_projeto=:new_desc, categoria_projeto=:new_category, banner_projeto=:newBanner WHERE id_project = :id_project";
         
                 $resultado = $conexao->prepare($update);
                 $resultado->bindParam(':id_project', $id_project, PDO::PARAM_INT);
                 $resultado->bindParam(':new_name', $new_name, PDO::PARAM_STR);
                 $resultado->bindParam(':new_desc', $new_desc, PDO::PARAM_STR);
+                $resultado->bindParam(':new_category', $new_category, PDO::PARAM_STR);
                 $resultado->bindParam(':newBanner', $newBanner, PDO::PARAM_STR);
                 $resultado->execute();
         
