@@ -76,7 +76,12 @@ if($resultado->rowCount() > 0){
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="?section=novo_projeto" class="nav-link">Criar Projeto</a>
+        <?php if(isset($_GET['section'])){
+          echo '<a href="home.php" class="nav-link">Home</a>';
+        }else{
+         echo '<a href="?section=novo_projeto" class="nav-link">Criar Projeto</a>';
+
+        } ?>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="../paginas/calendar.html" class="nav-link">Calendário</a>
@@ -200,7 +205,7 @@ if($resultado->rowCount() > 0){
             if($foto_user == 'default-photo.png'){
               echo '<img src="../dist/img/user/default-user/default-photo.png" class="img-circle elevation-2 ">';
             }else{
-              echo '<img src="../dist/img/user/' . $foto_user . '" class="img-circle elevation-2>';
+              echo '<img src="../dist/img/user/'.$foto_user.'" class="img-circle elevation-2 ">';
             }
           ?>
         </div>

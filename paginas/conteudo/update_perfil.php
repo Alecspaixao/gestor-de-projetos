@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de conta</title>
+    <title>Alterar perfil</title>
     <link rel="stylesheet" href="../../dist/css/styleLogin/styleRegister.css">
 </head>
 <body>
@@ -43,49 +43,38 @@
                 <form role="form" method="post" enctype="multipart/form-data">
                   <div class="card-body">
 
-                  <!-- Nome do Projeto -->
+                  <!-- Nome do Usuario -->
                     <div class="form-group">
                       <label for="projectName">Nome</label>
                       <input type="text" class="form-control" id="projectName" name="name" placeholder="Digite o nome" required>
                     </div>
 
-                  <!-- Descrição do Projeto -->
+                  <!-- Informações Pessoais -->
                   <div class="form-group">
                       <label for="projectDescription">Email</label>
-                      <input class="form-control" id="projectDescription" name="email" rows="3" placeholder="Digite a descrição do projeto" required></input>
+                      <input class="form-control" id="projectDescription" name="email" rows="3" placeholder="Digite seu email" required></input>
                   </div>
 
                   <div class="form-group">
                       <label for="projectDescription">Senha</label>
-                      <input class="form-control" id="projectDescription" name="password" rows="3" placeholder="Digite a descrição do projeto" required></input>
+                      <input class="form-control" type="password" id="projectDescription" name="password" rows="3" placeholder="Digite sua senha" required></input>
                   </div>
-
-                  <!-- Categoria -->
                   <div class="form-group">
-                      <label for="projectCategory">Categoria</label>
-                      <select class="form-control" id="projectCategory" name="category" required>
-                          <option value="" disabled selected>Escolha a categoria</option>
-                          <option value="Trabalho">Trabalho</option>
-                          <option value="Faculdade">Faculdade</option>
-                          <option value="Projeto Pessoal">Projeto Pessoal</option>
-                          <!-- Adicione mais opções conforme necessário -->
-                      </select>
+                      <label for="projectDescription">Confirme sua senha</label>
+                      <input class="form-control" type="password" id="projectDescription" name="cpassword" rows="3" placeholder="Repita sua senha" required></input>
                   </div>
-
                   <!-- Arquivo -->
                   <div class="form-group">
                       <label for="projectFile">Foto de Perfil</label>
                       <div class="input-group">
                           <div class="custom-file">
-                              <input type="file" class="custom-file-input" name="banner" id="projectFile">
+                              <input type="file" class="custom-file-input" name="foto" id="projectFile">
                               <label class="custom-file-label" for="projectFile">Escolher arquivo</label>
                           </div>
                           </div>
                       </div>
-                  </div>
-
                   <!-- Botão de Enviar -->
-                  <button type="submit" class="btn btn-primary" name="btnCreate">Cadastrar Projeto</button>
+                  <button type="submit" class="btn btn-primary" name="btnUpdate">Atualizar Perfil</button>
                   </div>
               </form>
 <?php
@@ -95,7 +84,7 @@
         $new_name = $_POST["name"];
         $new_email = $_POST["email"];
         $new_password = $_POST["password"];
-        $passwordConfirm = $_POST["passwordConfirm"];
+        $cpassword = $_POST["cpassword"];
 
         $select = "SELECT email_user, senha_user FROM tb_user WHERE id_user=:id_user";
         $resultado = $conexao->prepare($select);
@@ -106,7 +95,7 @@
             $old_email = $fetch->email_user;
             $old_password = $fetch->senha_user;
         }
-        if($new_password == $passwordConfirm){
+        if($new_password == $cpassword){
             $new_password = password_hash($new_password, PASSWORD_DEFAULT);
 
             if(isset($_FILES['foto'])){
@@ -137,10 +126,9 @@
                     $newUserPhoto = $foto_user;
                 }  
             }
-
             try{
                 $register = "UPDATE tb_user SET nome_user=:new_name, email_user=:new_email, senha_user=:new_password, foto_user=:newUserPhoto WHERE id_user=:user_id";
-        
+
                 $resultado = $conexao->prepare($register);
                 $resultado->bindParam(':user_id', $id_user, PDO::PARAM_INT);
                 $resultado->bindParam(':new_name', $new_name, PDO::PARAM_STR);
@@ -148,10 +136,10 @@
                 $resultado->bindParam(':new_password', $new_password, PDO::PARAM_STR);
                 $resultado->bindParam(':newUserPhoto', $newUserPhoto, PDO::PARAM_STR);
                 $resultado->execute();
-        
+
                 if($resultado->rowCount() > 0){
                     echo "<div>Usuario atualizado com sucesso!</div>";
-                    header("Refresh: 3, ../index.php");
+                    header("Refresh: 3, ../login.php");
                 }else{
                     echo "<div>Não foi possivel efetuar o cadastro</div>";
                     header("Refresh: 3, home.php");
@@ -166,7 +154,7 @@
             }catch(PDOException $err){
                 echo "ERRO DE PDO: ". $err;
             }
-            
+
         }else{
             echo "<div>Senhas nao batem!</div>";
             exit();

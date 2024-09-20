@@ -1,9 +1,10 @@
 <?php 
 
     include_once("../config/conexao.php");
-    $select = "SELECT * FROM tb_project WHERE id_user=:id_user";
+    $id_project = $_GET['idUpdate'];
+    $select = "SELECT * FROM tb_project WHERE id_project=:id_project";
         $resultado = $conexao->prepare($select);
-        $resultado->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+        $resultado->bindParam(':id_project', $id_project, PDO::PARAM_INT);
         $resultado->execute();
         if($resultado->rowCount() > 0){
             $fetch = $resultado->fetch(PDO::FETCH_OBJ);
@@ -22,30 +23,114 @@
     <link rel="stylesheet" href="../../dist/css/styleLogin/styleRegister.css">
 </head>
 <body>
-    <main id="mainLogin">
-        <section class="centerLogin">
-            <form method="post" enctype="multipart/form-data" >
-            <h1>Altere seu Projeto</h1>
+      <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>General Form</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Update Form</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
-            <div class="text-field" class="form-group" class="form-control">
-                <label for="usuario">Atualize o nome do projeto:</label>
-                <input type="text" name="name" placeholder="Nome" value=<?php echo $old_name?>>
-            </div>
-            <div class="text-field" class="form-group" class="form-control">
-                <label for="usuario">Atualize a descrição:</label>
-                <input type="text" name="desc" placeholder="Descrição" value=<?php echo $old_desc?>>
-            </div>
-            <div class="text-field" class="form-control">
-                <label for="usuario">Atualize o banner(opcional)</label>
-                <input type="file" name="banner" placeholder="Senha">
-            </div>
-            <button class="btnUpdate" name="btnUpdate" type="submit">Atualizar</button>
-            <div class="message">
-            </form>
-                <a href="index.php">Cancelar/a>
-            </div>
-        
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Alteração do Projeto <b><?php echo $old_name ?></b></h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+                <form role="form" method="post" enctype="multipart/form-data">
+                  <div class="card-body">
 
+                  <!-- Nome do Projeto -->
+                    <div class="form-group">
+                    <input type="text" class="form-control" value=<?php echo "$id_user" ?> name="id_user" hidden required>
+
+                      <label for="projectName">Nome do Projeto</label>
+                      <input type="text" class="form-control" id="projectName" value=<?php echo $old_name ?> name="projectName" placeholder="Digite o nome do projeto" required>
+                    </div>
+
+                  <!-- Descrição do Projeto -->
+                  <div class="form-group">
+                      <label for="projectDescription">Descrição</label>
+                      <textarea class="form-control" id="projectDescription" name="desc" rows="3" placeholder="Digite a descrição do projeto" required></textarea>
+                  </div>
+
+                  <!-- Categoria -->
+                  <div class="form-group">
+                      <label for="projectCategory">Categoria</label>
+                      <select class="form-control" id="projectCategory" name="category" required>
+                          <option value="" disabled selected>Escolha a categoria</option>
+                          <option value="Trabalho">Trabalho</option>
+                          <option value="Faculdade">Faculdade</option>
+                          <option value="Projeto Pessoal">Projeto Pessoal</option>
+                          <!-- Adicione mais opções conforme necessário -->
+                      </select>
+                  </div>
+
+                  <!-- Arquivo -->
+                  <div class="form-group">
+                      <label for="projectFile">Arquivo (opcional)</label>
+                      <div class="input-group">
+                          <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="banner" id="projectFile">
+                              <label class="custom-file-label" for="projectFile">Escolher arquivo</label>
+                          </div>
+                          <div class="input-group-append">
+                              <span class="input-group-text">Enviar</span>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Botão de Enviar -->
+                  <button type="submit" class="btn btn-primary" name="btnCreate">Cadastrar Projeto</button>
+                  </div>
+
+                  <!-- Checkbox para Confirmar -->
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="terms" required>
+                    <label class="form-check-label" for="terms">Eu li e aceito os termos e condições</label>
+                  </div>
+
+              </form>
+              <script src="dist/js/jquery-3.7.1.min.js"></script>
+<script src="dist/js/jquery.validate.js"></script>
+<script src="dist/js/additional-methods.js"></script>
+<script src="dist/js/localization/messages_pt_BR.min.js"></script>
+<script src="dist/js/localization/messages_pt_BR.js"></script>
+<script>
+                $(document).ready(function(){
+                    $("#formPro").validade({
+                        rules:{
+                            name:{
+                                required: true,
+                                maxlength: 45
+                            },
+                            desc:{
+                                required: true,
+                                maxlength: 1000
+                            }
+                        }
+
+                    })
+                })
+    </script>
 <?php
 
 if(isset($_GET['idUpdate'])){
@@ -87,9 +172,9 @@ if(isset($_GET['idUpdate'])){
             }
 
             try{
-                $register = "UPDATE tb_project SET nome_projeto=:new_name, descricao_projeto=:new_desc, banner_projeto=:newBanner WHERE id_project = :id_project";
+                $update = "UPDATE tb_project SET nome_projeto=:new_name, descricao_projeto=:new_desc, banner_projeto=:newBanner WHERE id_project = :id_project";
         
-                $resultado = $conexao->prepare($register);
+                $resultado = $conexao->prepare($update);
                 $resultado->bindParam(':id_project', $id_project, PDO::PARAM_INT);
                 $resultado->bindParam(':new_name', $new_name, PDO::PARAM_STR);
                 $resultado->bindParam(':new_desc', $new_desc, PDO::PARAM_STR);
@@ -116,5 +201,22 @@ if(isset($_GET['idUpdate'])){
     }
 }else{header("Location: ../home.php");}
 ?>
+            </div>
+            <!-- /.card -->
+
+          
+
+          
+
+          <!--/.col (left) -->
+          <!-- right column -->
+          
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
 </body>
 </html>
