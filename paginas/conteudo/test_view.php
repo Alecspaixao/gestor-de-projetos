@@ -10,7 +10,21 @@
 <?php 
 
     include_once('../config/conexao.php');
-    $select = "SELECT * FROM tb_project WHERE id_user = :id_user ORDER BY id_project DESC";
+    if(isset($_GET['category'])){
+      if($_GET['category'] == 'faculdade'){
+        $select = "SELECT * FROM tb_project WHERE id_user = :id_user AND categoria_projeto = 'Faculdade' ORDER BY id_project DESC";
+      }
+      elseif($_GET['category'] == 'projeto_pessoal'){
+        $select = "SELECT * FROM tb_project WHERE id_user = :id_user AND categoria_projeto = 'Projeto Pessoal'  ORDER BY id_project DESC";
+      }
+      elseif($_GET['category'] == 'trabalho'){
+        $select = "SELECT * FROM tb_project WHERE id_user = :id_user AND categoria_projeto  = 'Trabalho'  ORDER BY id_project DESC";
+      }
+    }else{
+      $select = "SELECT * FROM tb_project WHERE id_user = :id_user ORDER BY id_project DESC";
+    }
+
+
     try{
         $resultado = $conexao->prepare($select);
         $resultado->bindParam(':id_user', $id_user, PDO::PARAM_INT);
@@ -31,7 +45,7 @@
 </div>
     <?php
             }
-        }
+        }else{echo "<div class='alert alert-warning mx-auto text-center w-100 '><h3>Nenhum resultado encontrado.</h3></div>";}
             
     }catch(PDOException $err){
         echo "ERRO DE PDO:" . $err;
