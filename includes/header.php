@@ -64,7 +64,7 @@
           <button class="btn btn-navbar" type="submit">
             <i class="fas fa-search"></i>
           </button>
-        </div>
+        </div>a
       </div>
     </form>
 
