@@ -20,7 +20,7 @@
 
     }
   }else{
-    include_once('conteudo/test_view.php');
+    include_once('conteudo/view.php');
 
   }
   
