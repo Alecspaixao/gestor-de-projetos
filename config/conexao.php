@@ -1,7 +1,7 @@
 <?php
     try{
     define('HOST', 'localhost');
-    define('BD', 'ProjectShelf');
+    define('BD', 'gestor-de-projetos');
     define('USER', 'root');
     define('PASS', 'bdjmf');
 

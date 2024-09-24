@@ -9,6 +9,9 @@
     session_destroy();
     header("Location: ../login.php");
   }
+  if(isset($_GET['category'])){
+    $category = $_GET['category'];
+  }
 
 ?>
 
@@ -158,20 +161,20 @@ if($resultado->rowCount() > 0){
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="?category=faculdade" class="nav-link ">
+              <li class="nav-item active">
+                <a href="?category=faculdade" class="nav-link <?php if(isset($_GET['category'])){ if($category == 'faculdade'){ echo "active"; } } ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Faculdade</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="?category=trabalho" class="nav-link">
+              <li class="nav-item ">
+                <a href="?category=trabalho" class="nav-link <?php if(isset($_GET['category'])){ if($category == 'trabalho'){ echo "active"; } } ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Trabalho</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?category=projeto_pessoal" class="nav-link">
+                <a href="?category=projeto_pessoal" class="nav-link <?php if(isset($_GET['category'])){ if($category == 'projeto_pessoal'){ echo "active"; } } ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Projeto Pessoal</p>
                 </a>

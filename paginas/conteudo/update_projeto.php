@@ -100,7 +100,7 @@
                   </div>
 
                   <!-- Botão de Enviar -->
-                  <button type="submit" class="btn btn-primary" name="btnUpdate">Cadastrar Projeto</button>
+                  <button type="submit" class="btn btn-primary" name="btnUpdate">Atualizar Projeto</button>
                   </div>
               </form>
               <script src="dist/js/jquery-3.7.1.min.js"></script>
