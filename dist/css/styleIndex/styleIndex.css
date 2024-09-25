@@ -7,10 +7,7 @@
 }
 .topo-site{
     background-color: black;
-}
-body{
-    height: 100vh;
-}
+}   
 .flex{
     display:flex;
 }
@@ -21,7 +18,7 @@ body{
 }
 
 header{
-    padding: 20px 4%;
+    padding: 10px;
 }
 
 header > .interface{
@@ -57,8 +54,14 @@ header .btn-contato button{
     font-weight: 500;
     border: 0;
     border-radius: 15px;
-    transition-duration: 0.2s;
+    transition: .2s;
     cursor:pointer;
+}
+
+h2.titulo{
+    color: black;
+    font-size: 40px;
+    text-align: center;
 }
 
 header .btn-contato button:hover{
@@ -74,21 +77,15 @@ header nav ul li{
     padding: 0px 40px;
 }
 
-h2.titulo{
-    color: black;
-    font-size: 38px;
-}
-h2 > 
-
 /*ESTILIZAÇÃO DO TOPO DO SITE*/
 section.topo-site{
-    padding: 40px 4%;
+    padding: 10px 2%;
 }
 
 section.topo-site .flex{
     align-items: center;
     justify-content: center;
-    gap: 90px /*Distanciamento entre elemnentos*/
+    gap: 90px; /*Distanciamento entre elemnentos*/
 }
 .topo-site h1{
     font-family: poppinsbold;
@@ -123,13 +120,11 @@ section.topo-site .flex{
 }
 
 /*ESTILIZAÇÃO DA SEÇÃO DE SERVIÇOS*/
-section.servicos{
+section.especialidades{
     padding: 40px 4%;
     background-color: rgb(245, 245, 245);
 }
 
-section.servicos h2{
+.especialidades .especialidades-box{
     color: black;
-    text-align: center;
-    margin-bottom: 40px;
 }

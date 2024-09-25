@@ -37,7 +37,7 @@
             </form>
                 <p>Enviaremos a você um e-mail de verificação com código. </p>
                 <p>Acesse e insira-o na próxima página.</p>
-                <a href="index.php">Voltar ao Login</a>
+                <a href="login.php">Voltar ao Login</a>
             </div>
         
 <?php
