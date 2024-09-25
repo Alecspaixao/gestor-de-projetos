@@ -52,8 +52,8 @@
                     echo '<img src="../dist/img/banner/' . $show->banner_projeto . '">';}
                 else{
                     echo '<img src="../dist/img/banner/default-banner/default-banner.jpg"';}?>
-                <a <?php echo 'href="home.php?section=update_projeto&idUpdate=' . $show->id_project . '"'?>>Atualizar</a>
-                <a <?php echo 'href="home.php?section=del_projeto&idDel=' . $show->id_project . '"'?> onclick="return confirm('AVISO! Esta ação nao pode ser desfeita!')">Excluir</a>
+                <a <?php echo 'href="home.php?action=update_projeto&idUpdate=' . $show->id_project . '"'?>>Atualizar</a>
+                <a <?php echo 'href="home.php?action=del_projeto&idDel=' . $show->id_project . '"'?> onclick="return confirm('AVISO! Esta ação nao pode ser desfeita!')">Excluir</a>
 
 
 

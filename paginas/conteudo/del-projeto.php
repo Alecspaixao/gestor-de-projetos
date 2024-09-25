@@ -1,8 +1,8 @@
 <?php 
     include_once('../../config/conexao.php');
 
-    if(isset($_GET['idDel'])){
-        $id_project = $_GET['idDel'];
+    if(isset($_GET['id'])){
+        $id_project = $_GET['id'];
     
         try{
             $fotoSelect = "SELECT banner_projeto FROM tb_project WHERE id_project = :id_project";

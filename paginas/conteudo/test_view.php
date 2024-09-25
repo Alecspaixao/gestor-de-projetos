@@ -1,11 +1,11 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header flex">
+    <action class="content-header flex">
       <div class="container-fluid">
         <div class="row mb-2">  
         </div>
       </div><!-- /.container-fluid -->
-    </section> 
+    </action> 
 <div style="display: flex; gap: 10px; flex-wrap: wrap; padding: 1px;">
 <?php 
 
@@ -40,8 +40,8 @@
         <p style="margin: 10px 0; font-size: 14px; color: #555;"><?php echo $show->categoria_projeto; ?></p>
         <p style="font-size: 12px; color: #999;">Última atualização: <?php echo $show->UltUpdate_projeto; ?></p>
     </div>
-    <a href="?section=update_projeto&idUpdate=<?php echo $show->id_project; ?>" style="text-decoration: none; color: #0073e6; font-weight: bold; font-size: 14px;" class="btn btn-warning">ALterar</a>
-    <a href="?section=del_projeto&idDel=<?php echo $show->id_project; ?>" onclick="confirm('Tem certeza? Esta ação não pode ser desfeita!')" style="text-decoration: none; color: #0073e6; font-weight: bold; font-size: 14px;" class="btn btn-danger">Excluir</a>
+    <a href="?action=update_projeto&id=<?php echo $show->id_project; ?>" style="text-decoration: none; color: #0073e6; font-weight: bold; font-size: 14px;" class="btn btn-warning">ALterar</a>
+    <a href="?action=del_projeto&id=<?php echo $show->id_project; ?>" onclick="confirm('Tem certeza? Esta ação não pode ser desfeita!')" style="text-decoration: none; color: #0073e6; font-weight: bold; font-size: 14px;" class="btn btn-danger">Excluir</a>
 </div>
     <?php
             }
@@ -66,7 +66,7 @@
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
-    </section>
+    </action>
     <!-- /.content -->
   </div>
 </body>

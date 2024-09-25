@@ -79,10 +79,10 @@ if($resultado->rowCount() > 0){
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <?php if(isset($_GET['section']) || isset($_GET['category'])){
+        <?php if(isset($_GET['action']) || isset($_GET['category'])){
           echo '<a href="home.php" class="nav-link">Home</a>';
         }else{
-         echo '<a href="?section=novo_projeto" class="nav-link">Criar Projeto</a>';
+         echo '<a href="?action=novo_projeto" class="nav-link">Criar Projeto</a>';
 
         } ?>
       </li>
@@ -100,7 +100,7 @@ if($resultado->rowCount() > 0){
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="dropdown-divider"></div>
-          <a <?php echo 'href="?section=update_perfil&idUpdate=' . $id_user . '"'?> class="dropdown-item">
+          <a <?php echo 'href="?action=update_perfil&idUpdate=' . $id_user . '"'?> class="dropdown-item">
             <i class="fas fa-envelope mr-2"></i> ALterar Perfil
             <!-- Espaço para o item aqui -->
           </a>

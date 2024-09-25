@@ -1,7 +1,7 @@
 <?php 
 
     include_once("../config/conexao.php");
-    $id_project = $_GET['idUpdate'];
+    $id_project = $_GET['id'];
     $select = "SELECT * FROM tb_project WHERE id_project=:id_project";
         $resultado = $conexao->prepare($select);
         $resultado->bindParam(':id_project', $id_project, PDO::PARAM_INT);
@@ -125,8 +125,8 @@
     </script>
 <?php
 
-if(isset($_GET['idUpdate'])){
-    $id_project = $_GET['idUpdate'];
+if(isset($_GET['id'])){
+    $id_project = $_GET['id'];
 
 
     if(isset($_POST["btnUpdate"])){
@@ -200,7 +200,7 @@ if(isset($_GET['idUpdate'])){
                 echo "ERRO DE PDO: ". $err;
             }
     }
-}else{header("Location: ../home.php");}
+}else{header("Location: ../paginas/home.php");}
 ?>
             </div>
             <!-- /.card -->

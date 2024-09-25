@@ -1,18 +1,18 @@
 <?php
   include_once('../includes/header.php');
-  if(isset($_GET['section'])){
-    $section = $_GET['section'];
+  if(isset($_GET['action'])){
+    $action = $_GET['action'];
     
-    if($section == 'novo_projeto'){
+    if($action == 'novo_projeto'){
       include_once('conteudo/cadastroProjetos.php');
     }
-    elseif($section == 'update_projeto'){
+    elseif($action == 'update_projeto'){
       include_once('conteudo/update_projeto.php');
     }
-    elseif($section == 'del_projeto'){
+    elseif($action == 'del_projeto'){
       include_once('conteudo/del-projeto.php');
     }
-    elseif($section == 'update_perfil'){
+    elseif($action == 'update_perfil'){
       include_once('conteudo/update_perfil.php');
     }
     else{

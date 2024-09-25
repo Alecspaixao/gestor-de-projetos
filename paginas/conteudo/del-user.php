@@ -1,8 +1,8 @@
 <?php 
     include_once('../../config/conexao.php');
 
-    if(isset($_GET['idDel'])){
-        $id_user = $_GET['idDel'];
+    if(isset($_GET['id'])){
+        $id_user = $_GET['id'];
     
         try{
             $fotoSelect = "SELECT foto_user FROM tb_user WHERE id_user = :id_user";

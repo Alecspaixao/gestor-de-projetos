@@ -30,7 +30,7 @@
         </form>
 <?php 
     session_start();
-    if(isset($_SESSION['emailUser']) && $_SESSION['senhaLogin']){
+    if(isset($_SESSION['LoginUser']) && $_SESSION['senhaLogin']){
       header("Location: paginas/home.php");
     }
     include_once('config/conexao.php');
