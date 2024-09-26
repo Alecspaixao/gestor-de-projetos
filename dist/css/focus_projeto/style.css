@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Estilos gerais */
+body {
+    font-family: Poppins;
+    margin: 0;
+    padding: 0;
+}
+/* Estilos do banner */
+#banner {
+    height: 170px;
+    background-image: url('../../img/banner/66ec2ed9a0f5f.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+#banner > h1{
+    text-align: center;
+    color: #fff;
+    font-size: 48px;
+    opacity: 0.7;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin: 0px;
+    padding-top: 40px;
+}
+#banner > p{
+    text-align: center;
+    color: #fff;
+    opacity: 0.7;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin: 0px;
+}
+.container{
+    display: flex;
+    justify-content: space-around; 
+    text-align: justify;
+    align-items: top;
+}
+.about, .goals{
+    max-width: 700px;
+}
