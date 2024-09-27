@@ -32,7 +32,8 @@
 
         if($resultado->rowCount() > 0){
             while($show = $resultado->fetch(PDO::FETCH_OBJ)){
-    ?> 
+    ?>
+    <a href="?action=focus_projeto&id=<?php echo $show->id_project; ?>"> 
 <div style="min-width: 297px; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; gap: 10px;">
     <div style="background-image: url('../dist/img/banner/<?php echo $show->banner_projeto; ?>'); background-size: cover; background-position: center; height: 150px; border-radius: 8px;"></div>
     <div style="flex: 1;">
@@ -43,6 +44,7 @@
     <a href="?action=update_projeto&id=<?php echo $show->id_project; ?>" style="text-decoration: none; color: #0073e6; font-weight: bold; font-size: 14px;" class="btn btn-warning">ALterar</a>
     <a href="?action=del_projeto&id=<?php echo $show->id_project; ?>" onclick="confirm('Tem certeza? Esta ação não pode ser desfeita!')" style="text-decoration: none; color: #0073e6; font-weight: bold; font-size: 14px;" class="btn btn-danger">Excluir</a>
 </div>
+</a>
     <?php
             }
         }else{echo "<div class='alert alert-warning mx-auto text-center w-100 '><h3>Nenhum resultado encontrado.</h3></div>";}

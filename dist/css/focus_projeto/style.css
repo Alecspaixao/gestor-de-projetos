@@ -9,7 +9,6 @@ body {
 /* Estilos do banner */
 #banner {
     height: 170px;
-    background-image: url('../../img/banner/66ec2ed9a0f5f.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -19,7 +18,7 @@ body {
     text-align: center;
     color: #fff;
     font-size: 48px;
-    opacity: 0.7;
+    opacity: 0.9;
     letter-spacing: 1px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     margin: 0px;
@@ -28,7 +27,7 @@ body {
 #banner > p{
     text-align: center;
     color: #fff;
-    opacity: 0.7;
+    opacity: 0.9;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     margin: 0px;
 }
