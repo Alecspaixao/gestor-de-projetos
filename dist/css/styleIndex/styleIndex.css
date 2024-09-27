@@ -6,25 +6,32 @@
     box-sizing: border-box;
 }
 .topo-site{
-    background-color: black;
-}   
+    background-color: #160f2495;
+}
 .flex{
     display:flex;
 }
 
 .interface{
-    max-width: 1280px;
     margin: 0 auto;
 }
-
+/*ESTILIZAÇÃO DO CABEÇALHO*/
 header{
     padding: 10px;
+    position: fixed; /* Adicione essa linha para tornar o menu fixo */
+    top: 0; /* Ajuste a posição do menu para o topo da página */
+    left: 0; /* Ajuste a posição do menu para a esquerda da página */
+    width: 100%; /* Ajuste a largura do menu para a largura da página */
+    background-color: #160f24; /* Adicione uma cor de fundo para o menu */
+    z-index: 1; /* Ajuste a ordem de empilhamento do menu para que ele fique acima de outros elementos */
 }
 
 header > .interface{
     display: flex;
+    padding: 05px 2%;
     align-items: center;
     justify-content: space-between;
+    min-width: 740px;
 }
 
 header>h2{
@@ -32,23 +39,33 @@ header>h2{
     line-height: 25px;
 }
 h2 > span{
-    color: rgb(99, 0, 192);
+    color: #9d6ce1;
     font-family: poppinsbold;
+}
+.solucoes-span{
+    color:#160f24
+}
+.name-project h2{
+    min-width: 230px;
+}
+
+header .interface .name-project h2{
+    color: white;
 }
 
 header a{
-    color: rgb(104, 4, 162);
+    color: white;
     text-decoration: none;
     display: inline-block;
     transition-duration: 0.2s;
 }
 
 header a:hover{
-    color: blueviolet;
+    color: #b27cff;
     transform: scale(1.03);
 }
 header .btn-contato button{
-    background-color: rgb(126, 0, 198);
+    background-color:white;
     padding: 5px 10px;
     font-size: 18px;
     font-weight: 500;
@@ -58,13 +75,9 @@ header .btn-contato button{
     cursor:pointer;
 }
 
-h2.titulo{
-    color: black;
-    font-size: 40px;
-    text-align: center;
-}
-
 header .btn-contato button:hover{
+    color: white;
+    background-color: #b27cff;
     box-shadow: 0px 0px 5px #400598d7;
 }
 
@@ -78,8 +91,20 @@ header nav ul li{
 }
 
 /*ESTILIZAÇÃO DO TOPO DO SITE*/
-section.topo-site{
+section.topo-site {
     padding: 10px 2%;
+    height: 600px;
+    min-width: 100%;
+    display: flex; /* Adicione essa linha para torná-lo um contêiner flexível */
+    flex-wrap: wrap; /* Permita que os elementos sejam quebrados para a próxima linha */
+    justify-content: center; /* Centralize os elementos horizontalmente */
+    align-items: center; /* Centralize os elementos verticalmente */
+    gap: 90px; /* Adicione um espaçamento entre os elementos */
+    background-color: #160f24;
+}
+
+section.topo-site > * { /* Selecione todos os filhos diretos de .topo-site */
+    margin: 20px; /* Adicione uma margem a cada elemento */
 }
 
 section.topo-site .flex{
@@ -87,6 +112,7 @@ section.topo-site .flex{
     justify-content: center;
     gap: 90px; /*Distanciamento entre elemnentos*/
 }
+
 .topo-site h1{
     font-family: poppinsbold;
     color: white;
@@ -95,7 +121,7 @@ section.topo-site .flex{
 }
 
 .topo-site .txt-topo-site h1 span{
-    color: blueviolet;
+    color: #b27cff;
 }
 
 
@@ -107,7 +133,7 @@ section.topo-site .flex{
 .topo-site .img-topo-site img{
     position: relative;
     animation: flutuar 2s ease-in-out infinite alternate;
-    width: 500px;
+    width: 400px;
 }
 
 @keyframes flutuar{
@@ -115,16 +141,69 @@ section.topo-site .flex{
         top: 0;
     }
     100%{
-        top: 30px;
+        top: 15px;
     }
 }
 
+
+
 /*ESTILIZAÇÃO DA SEÇÃO DE SERVIÇOS*/
+h2.titulo{
+    color: black;
+    font-size: 40px;
+    text-align: center;
+}
+
 section.especialidades{
     padding: 40px 4%;
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(226, 212, 235);
 }
 
 .especialidades .especialidades-box{
+    margin-top: 40px;
     color: black;
+    padding: 40px;
+    border-radius: 25px;
+    transition: .2s;
+    box-shadow: 0 0 5px rgba(34, 26, 56, 0.689);
 }
+
+.especialidades .especialidades-box:hover{
+    transform: scale(1.02);
+}
+
+.especialidades .especialidades-box i{  
+    font-size:  70px;
+    color: purple;
+}
+
+.especialidades-box i {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    font-size: 70px; /* adjust the font size as needed */
+    color: purple;
+  }
+
+.especialidades .especialidades-box h3{
+    text-align: center;
+    font-size: 28px;
+    margin: 10px 0px;
+}
+
+section.especialidades .flex{
+    gap: 50px;
+}
+
+
+.especialidades .especialidades-box p{
+    text-align: justify;
+}
+
+/*ESTILIZAÇÃO DO FOOTER*/
+footer {
+    background-color: #160f24; /* Same color as the header */
+    padding: 10px;
+    text-align: center;
+    color: white;
+}   
