@@ -18,6 +18,8 @@
 --
 -- Table structure for table `tb_user`
 --
+CREATE DATABASE `gestor-de-projetos`;
+USE `gestor-de-projetos`;
 
 DROP TABLE IF EXISTS `tb_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

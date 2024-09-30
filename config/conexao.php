@@ -1,7 +1,7 @@
 <?php
     try{
     define('HOST', 'localhost');
-    define('BD', 'gestor-de-projetos.sql');
+    define('BD', 'gestor-de-projetos');
     define('USER', 'root');
     define('PASS', '');
 

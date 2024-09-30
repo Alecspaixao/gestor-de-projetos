@@ -8,9 +8,7 @@
 .flex{
     display:flex;
 }
-html {
-    scroll-behavior: smooth;
-  }
+
 .interface{
     margin: 0 auto;
 }
@@ -92,19 +90,15 @@ header nav ul li{
 /*ESTILIZAÇÃO DO TOPO DO SITE*/
 section.topo-site {
     padding: 10px 2%;
-    height: 600px;
+    height: 94vh;
     min-width: 100%;
     display: flex; /* Adicione essa linha para torná-lo um contêiner flexível */
     flex-wrap: wrap; /* Permita que os elementos sejam quebrados para a próxima linha */
     justify-content: center; /* Centralize os elementos horizontalmente */
     align-items: center; /* Centralize os elementos verticalmente */
-    gap: 90px; /* Adicione um espaçamento entre os elementos */
-    background-color: #160f24;
+    gap: 90px; /* Adicione um espaçamento entre os elementos */        
 }
 
-section.topo-site > * { /* Selecione todos os filhos diretos de .topo-site */
-    margin: 20px; /* Adicione uma margem a cada elemento */
-}
 
 section.topo-site .flex{
     align-items: center;
@@ -120,12 +114,14 @@ section.topo-site .flex{
 }
 
 .topo-site .txt-topo-site h1 span{
-    color: #b27cff;
+    font-family: poppinsbold;
+    color: #160f24;
+    font-size: 60px;
 }
 
 
 .topo-site .txt-topo-site p{
-    color: white;
+    color: #160f24;
     margin: 40px 0;
 }
 
@@ -135,74 +131,10 @@ section.topo-site .flex{
     width: 400px;
 }
 
-@keyframes flutuar{
-    0%{
-        top: 0;
-    }
-    100%{
-        top: 15px;
-    }
-}
-
-
-
-/*ESTILIZAÇÃO DA SEÇÃO DE SERVIÇOS*/
-h2.titulo{
-    color: black;
-    font-size: 40px;
-    text-align: center;
-}
-
-section#especialidades{
-    padding: 40px 4%;
-    background-color: rgb(226, 212, 235);
-}
-
-#especialidades .especialidades-box{
-    margin-top: 40px;
-    color: black;
-    padding: 40px;
-    border-radius: 25px;
-    transition: .2s;
-    box-shadow: 0 0 5px rgba(34, 26, 56, 0.689);
-}
-
-#especialidades .especialidades-box:hover{
-    transform: scale(1.02);
-}
-
-#especialidades .especialidades-box i{  
-    font-size:  70px;
-    color: purple;
-}
-
-.especialidades-box i {
-    display: inline-block;
-    text-align: center;
-    width: 100%;
-    font-size: 70px; /* adjust the font size as needed */
-    color: purple;
-  }
-
-#especialidades .especialidades-box h3{
-    text-align: center;
-    font-size: 28px;
-    margin: 10px 0px;
-}
-
-section#especialidades .flex{
-    gap: 50px;
-}
-
-
-#especialidades .especialidades-box p{
-    text-align: justify;
-}
-
 /*ESTILIZAÇÃO DO FOOTER*/
 footer {
     background-color: #160f24; /* Same color as the header */
-    padding: 10px;
+    padding: 9px;
     text-align: center;
     color: white;
 }   
