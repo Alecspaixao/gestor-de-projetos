@@ -13,6 +13,7 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    margin-bottom: 12px;
 }
 #banner > h1{
     text-align: center;
@@ -37,6 +38,8 @@ body {
     text-align: justify;
     align-items: top;
 }
+
 .about, .goals{
     max-width: 700px;
+    padding: 10px;
 }
