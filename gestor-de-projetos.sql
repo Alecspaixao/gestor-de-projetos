@@ -15,13 +15,29 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Table structure for table `tb_project`
---
+-- Começar desabilitando as verificações de chave estrangeira
+SET FOREIGN_KEY_CHECKS = 0;
 
+-- Remover tabelas existentes
+DROP TABLE IF EXISTS `tb_todo`;
 DROP TABLE IF EXISTS `tb_project`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+DROP TABLE IF EXISTS `tb_user`;
+
+-- Reabilitar as verificações de chave estrangeira
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- Estruturas das tabelas
+USE `gestor-de-projetos`;	
+
+CREATE TABLE `tb_user` (
+  `id_user` int NOT NULL AUTO_INCREMENT,
+  `nome_user` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_user` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `senha_user` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto_user` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE `tb_project` (
   `id_project` int NOT NULL AUTO_INCREMENT,
   `nome_projeto` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -34,25 +50,7 @@ CREATE TABLE `tb_project` (
   KEY `fk_id_user_idx` (`id_user`),
   CONSTRAINT `fk_id_user` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `tb_project`
---
-
-LOCK TABLES `tb_project` WRITE;
-/*!40000 ALTER TABLE `tb_project` DISABLE KEYS */;
-INSERT INTO `tb_project` VALUES (51,'ProjectShelf','Genetica','Projeto Pessoal','66ecac024e310.jpeg','2024-09-19 19:56:02',19),(54,'Django','documentos','Trabalho','default-banner.jpg','2024-09-19 20:29:14',19),(55,'NLW','front-end','Projeto Pessoal','default-banner.jpg','2024-09-19 21:29:11',17);
-/*!40000 ALTER TABLE `tb_project` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tb_todo`
---
-
-DROP TABLE IF EXISTS `tb_todo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tb_todo` (
   `id_todo` int NOT NULL AUTO_INCREMENT,
   `tarefa_todo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -62,51 +60,27 @@ CREATE TABLE `tb_todo` (
   KEY `fk_id_projeto_idx` (`id_projeto`),
   CONSTRAINT `fk_id_projeto` FOREIGN KEY (`id_projeto`) REFERENCES `tb_project` (`id_project`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `tb_todo`
---
+-- Inserção de dados
+LOCK TABLES `tb_user` WRITE;
+INSERT INTO `tb_user` VALUES 
+(6,'Pr0xy_3301','eriksynyster30@gmail.com','$2y$10$0hzgnExugRmsyv9IjBjFxuN2SUAO5iX/BFp/HTpuXyBfQEeElphO.','66e72b82d2bab.jpg'),
+(17,'teste','thiago@gmail.com','$2y$10$wnr02SPrN9VJSZudoWmuLO1BtvKU4VmxOMIXGi39qnQb9NHYw6aEK','default-banner.png'),
+(19,'Thiago','thiago3@gmail.com','$2y$10$ngAWbBarzYCVxQnTJE9sEu6nSE3kLnOIOkUOW1NOC34sIaDs1C.aK','66ecbcc039340.png');
+UNLOCK TABLES;
+
+LOCK TABLES `tb_project` WRITE;
+INSERT INTO `tb_project` VALUES 
+(51,'ProjectShelf','Genetica','Projeto Pessoal','66ecac024e310.jpeg','2024-09-19 19:56:02',19),
+(54,'Django','documentos','Trabalho','default-banner.jpg','2024-09-19 20:29:14',19),
+(55,'NLW','front-end','Projeto Pessoal','default-banner.jpg','2024-09-19 21:29:11',17);
+UNLOCK TABLES;
 
 LOCK TABLES `tb_todo` WRITE;
-/*!40000 ALTER TABLE `tb_todo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tb_todo` ENABLE KEYS */;
+INSERT INTO `tb_todo` VALUES 
+(1,'Tarefa 1', 0, 51),
+(2,'Tarefa 2', 1, 54);
 UNLOCK TABLES;
 
---
--- Table structure for table `tb_user`
---
-
-DROP TABLE IF EXISTS `tb_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tb_user` (
-  `id_user` int NOT NULL AUTO_INCREMENT,
-  `nome_user` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_user` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `senha_user` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto_user` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tb_user`
---
-
-LOCK TABLES `tb_user` WRITE;
-/*!40000 ALTER TABLE `tb_user` DISABLE KEYS */;
-INSERT INTO `tb_user` VALUES (6,'Pr0xy_3301','eriksynyster30@gmail.com','$2y$10$0hzgnExugRmsyv9IjBjFxuN2SUAO5iX/BFp/HTpuXyBfQEeElphO.','66e72b82d2bab.jpg'),(17,'teste','thiago@gmail.com','$2y$10$wnr02SPrN9VJSZudoWmuLO1BtvKU4VmxOMIXGi39qnQb9NHYw6aEK','default-banner.png'),(19,'Thiago','thiago3@gmail.com','$2y$10$ngAWbBarzYCVxQnTJE9sEu6nSE3kLnOIOkUOW1NOC34sIaDs1C.aK','66ecbcc039340.png');
-/*!40000 ALTER TABLE `tb_user` ENABLE KEYS */;
-UNLOCK TABLES;
+-- Finalizando
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2024-09-24  6:03:48

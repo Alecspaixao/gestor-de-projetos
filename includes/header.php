@@ -67,6 +67,8 @@ if($resultado->rowCount() > 0){
   <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!--Bootstrap ícones--> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -87,7 +89,7 @@ if($resultado->rowCount() > 0){
         } ?>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../paginas/calendar.html" class="nav-link">Calendário</a>
+        <a href="../paginas/calendar.php" class="nav-link">Calendário</a>
       </li>
     </ul>
     <!-- Right navbar links -->
@@ -122,7 +124,7 @@ if($resultado->rowCount() > 0){
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="#" class="brand-link">
       <!--<img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8"> -->
       <span class="brand-text font-weight-light">Gestor de Projetos</span>
@@ -147,60 +149,57 @@ if($resultado->rowCount() > 0){
       </div>
 
       <!-- Sidebar Menu -->
+
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          
-               <li class="nav-item has-treeview menu-open">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Categorias -->
+        <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Categorias
-                <i class="right fas fa-angle-left"></i>
-              </p>
+              <i class="bi bi-tags"></i>
+                <p>
+                    Categorias
+                    <i class="right fas fa-angle-left"></i>
+                </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item active">
-                <a href="?category=faculdade" class="nav-link <?php if(isset($_GET['category'])){ if($category == 'faculdade'){ echo "active"; } } ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Faculdade</p>
-                </a>
-              </li>
-              <li class="nav-item ">
-                <a href="?category=trabalho" class="nav-link <?php if(isset($_GET['category'])){ if($category == 'trabalho'){ echo "active"; } } ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Trabalho</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="?category=projeto_pessoal" class="nav-link <?php if(isset($_GET['category'])){ if($category == 'projeto_pessoal'){ echo "active"; } } ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Projeto Pessoal</p>
-                </a>
-              </li>
+                <li class="nav-item active">
+                    <a href="?category=faculdade" class="nav-link <?php if(isset($_GET['category']) && $category == 'faculdade'){ echo "active"; } ?>">
+                    <i class="bi bi-dot"></i>
+                        <p>Faculdade</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="?category=trabalho" class="nav-link <?php if(isset($_GET['category']) && $category == 'trabalho'){ echo "active"; } ?>">
+                    <i class="bi bi-dot"></i>
+                        <p>Trabalho</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="?category=projeto_pessoal" class="nav-link <?php if(isset($_GET['category']) && $category == 'projeto_pessoal'){ echo "active"; } ?>">
+                    <i class="bi bi-dot"></i>
+                        <p>Projeto Pessoal</p>
+                    </a>
+                </li>
             </ul>
-          </li>
-          <li class="nav-item">
+        </li>
+        <!-- Arquivadas -->
+        <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Arquivadas
-              </p>
+            <i class="bi bi-archive"></i>
+                <p>Arquivadas</p>
             </a>
-          </li>
+        </li>
+        <!-- Lixeira -->
+        <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="bi bi-trash3"></i>
+                <p>Lixeira</p>
+            </a>
+        </li>
+    </ul>
+</nav>
 
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Lixeira
-              </p>
-            </a>
-          </li>
-              
-        </ul>
-      </nav>
+
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->

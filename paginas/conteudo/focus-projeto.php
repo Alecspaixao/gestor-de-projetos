@@ -30,6 +30,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $name; ?></title>
     <link rel="stylesheet" href="../dist/css/focus_projeto/style.css">
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
 </head>
 <body>
 <div class="content-wrapper">
@@ -38,17 +46,28 @@
         <div class="row mb-2">  
         </div>
       </div><!-- /.container-fluid -->
-      <?php echo "<section id='banner' style='background-image: url(\"../dist/img/banner/". $banner . "\");'>"; ?>
+      <?php echo "<section id='banner' style='background-image: url(\"../dist/img/banner/". $banner . "\"); background-color: '>";?>
         <h1><?php echo $name; ?></h1>
         <p><?php echo $category; ?></p>
     </section>
-    <section id="content">
-        <div class="container" >
+
+    <script>
+        $(document).ready(function() {
+        $('#summernote').summernote();
+        });
+    </script>
+    
+    <div class="container" >
+    <section id="content-desc">
             <div class="about" >
                 <h2 class="h2fdp">Descrição/Sobre</h2>
                 <p><?php echo $desc; ?></p>
+                <div class="text-editor">
+                    <textarea name="notes-project" id="summernote"></textarea>
+                </div>
+    </section>
 
-            </div>
+    <section id="content-goals">
             <div class="goals" >
                 <h2>Objetivos/Metas</h2>
                 <form action="" method="post">
@@ -79,6 +98,7 @@
             </div>
      </div>
     </section>
+    </div><!-- /.container -->
 </body>
 </div>
  
