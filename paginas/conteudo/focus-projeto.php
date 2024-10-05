@@ -60,7 +60,7 @@
     <div class="container" >
     <section id="content-desc">
             <div class="about" >
-                <h2 class="h2fdp">Descrição/Sobre</h2>
+                <h2>Descrição/Sobre:</h2>
                 <p><?php echo $desc; ?></p>
                 <div class="text-editor">
                     <textarea name="notes-project" id="summernote"></textarea>
@@ -69,7 +69,7 @@
 
     <section id="content-goals">
             <div class="goals" >
-                <h2>Objetivos/Metas</h2>
+                <h2>Objetivos/Metas:</h2>
                 <form action="" method="post">
                     <input type="text" name="tarefa" placeholder="Adicionar objetivo/meta">
                     <button type="submit" name="btnAdd">Adcionar</button>
@@ -85,7 +85,8 @@
                                 while($show = $resultado->fetch(PDO::FETCH_OBJ)){
                                    ?>
                                         <input type="checkbox" style="margin: 18px;" <?php if($show->isDone_todo == 1){echo "checked";} ?>><?php echo $show->tarefa_todo;?></input>
-                                        <a href="home.php?action=del_obj&id=". <?php echo $show->id_todo; ?> onclick="confirm('Deseja apagar essa meta/objetivo?')"><?php echo "<button class='btn btn-danger'>Excluir</button>" ?></a><br>
+                                        <a <?php echo 'href="?action=del_obj&id=' . $show->id_todo . '"'?> onclick="confirm('Deseja apagar essa meta/objetivo?')"><?php echo "<button class='btn btn-danger'>Excluir</button>" ?></a><br>
+                                        <?php echo $show->id_todo;?><br>
                                     <?php
                                 }
                             }else{

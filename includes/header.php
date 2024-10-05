@@ -144,7 +144,7 @@ if($resultado->rowCount() > 0){
           ?>
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo $show->nome_user?></a>
+          <a <?php echo 'href="?action=update_perfil&idUpdate=' . $id_user . '"'?> class="d-block"><?php echo $show->nome_user?></a>
         </div>
       </div>
 

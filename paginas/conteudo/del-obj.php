@@ -11,9 +11,9 @@
     $resultado->bindParam(':id_todo', $id_todo, PDO::PARAM_INT);
     $resultado->execute();
     if($resultado->rowCount() > 0){
-        header('Location: ../home.php');
+        header('Location: ../paginas/home.php');
     } else{
-        header('Location: ../home.php');
+        header('Location: ../paginas/home.php');
     }
     }catch(PDOException $e){
         echo "Erro ao deletar: ". $e->getMessage();
