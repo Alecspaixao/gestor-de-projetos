@@ -74,19 +74,26 @@
                     <input type="text" name="tarefa" placeholder="Adicionar objetivo/meta">
                     <button type="submit" name="btnAdd">Adcionar</button>
                 </form>
+                <form method="post">
                     <?php
                         try{
                             $select = "SELECT * FROM tb_todo WHERE id_projeto=:id_projeto";
                             $resultado = $conexao->prepare($select);
                             $resultado->bindParam(':id_projeto', $id_projeto, PDO::PARAM_INT);
                             $resultado->execute();
+                            $show = $resultado->fetch(PDO::FETCH_OBJ);
 
                             if($resultado->rowCount() > 0){
                                 while($show = $resultado->fetch(PDO::FETCH_OBJ)){
                                    ?>
-                                        <input type="checkbox" style="margin: 18px;" <?php if($show->isDone_todo == 1){echo "checked";} ?>><?php echo $show->tarefa_todo;?></input>
+                                        <input value="<?php echo $show->id_todo; ?>" name="tarefas[]" type="checkbox" style="margin: 18px;" <?php if($show->isDone_todo == 1){echo "checked";} ?>><?php echo $show->tarefa_todo;?></input>
                                         <a <?php echo 'href="?action=del_obj&id=' . $show->id_todo . '"'?> onclick="confirm('Deseja apagar essa meta/objetivo?')"><?php echo "<button class='btn btn-danger'>Excluir</button>" ?></a><br>
                                         <?php echo $show->id_todo;?><br>
+                                        <?php
+                                        $allTodos = [];
+                                        $allTodos = array_push($allTodos, $show->id_todo);
+                                    echo $allTodos
+                                        ?>
                                     <?php
                                 }
                             }else{
@@ -95,7 +102,48 @@
                         }catch(PDOException $err){
                             echo "ERRO DE PDO: ". $err;
                         }
+                        if(isset($_POST['btnUpdateTodo']) && $_POST['tarefas']){
+                            if(empty($_POST['tarefas'])){
+                                foreach ($_POST['tarefas'] as $tarefa){
+                                    try{
+                                        $update = "UPDATE tb_todo SET isDone_todo = 0 WHERE id_todo = :id_todo";
+                                        $resultado = $conexao->prepare($update);
+                                        $resultado->bindParam(':id_todo', $tarefa, PDO::PARAM_INT);
+                                        $resultado->execute();
+                                        
+                                        if($resultado->rowCount() > 0){
+                                            header("Location: home.php?action=focus_projeto&id=".$id_projeto);
+                                        }else{
+                                            echo "ERRO AO ATUALIZAR LISTA";
+                                        }
+                                    }catch(PDOException $err){
+                                        echo "ERRO DE PDO: ". $err;
+                                    }
+                                }
+                            }
+                            $tarefas = $_POST['tarefas'];
+                            foreach ($tarefas as $tarefa){
+                                try{
+                                    $update = "UPDATE tb_todo SET isDone_todo = 1 WHERE id_todo = :id_todo";
+                                    $resultado = $conexao->prepare($update);
+                                    $resultado->bindParam(':id_todo', $tarefa, PDO::PARAM_INT);
+                                    $resultado->execute();
+                                    
+
+                                    if($resultado->rowCount() > 0){
+                                        header("Location: home.php?action=focus_projeto&id=".$id_projeto);
+                                    }else{
+                                        echo "ERRO AO ATUALIZAR LISTA";
+    
+                                }
+                                }catch(PDOException $err){
+                                    echo "ERRO DE PDO: ". $err;
+                            }
+                        }
+                    }
                     ?>
+                    <button name="btnUpdateTodo" >Atualizar lista</button>
+                </form>
             </div>
      </div>
     </section>
@@ -119,5 +167,12 @@
             header("Location: home.php?action=focus_projeto&id=".$id_projeto);
         }catch(PDOException $err){
             echo "ERRO DE PDO: ". $err;
+        }
+    }
+
+    if($resultado->rowCount() > 0){
+        while($show = $resultado->fetch(PDO::FETCH_OBJ)){
+                $allTodos = array_push($allTodos, $show->id_todo);
+                echo $allTodos;
         }
     }
